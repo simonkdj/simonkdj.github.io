@@ -9,7 +9,7 @@ BCEWithLogitsLoss as the criterion and AdamW as the optimizer
 ### - Calculated Precision-Recall curve, AP score, and F1 score with Scikit-Learn
 
 
-# Intrested?
+# Interested?
 
 If you are an recruiter wanting to view the project, feel free to reach out to me at 
 
