@@ -1,4 +1,5 @@
-# Git-Committed Model for Faulty Commit detection (Private Repository)
+# Git-Committed Model for Faulty Commit detection 
+# (Private Repository)
 
 ### - Implemented a preprocessor for handling both categorical and numerial data. 
 standardize numerical data and onehotenocode categorical data.
