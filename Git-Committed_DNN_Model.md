@@ -10,5 +10,7 @@ BCEWithLogitsLoss as the criterion and AdamW as the optimizer
 
 #Intrested?
 If you are an recruiter wanting to view the project, feel free to reach out to me at 
+
 Email: simonkim377@berkeley.edu 
+
 LinkedIn: https://www.linkedin.com/in/linkgunhui/
