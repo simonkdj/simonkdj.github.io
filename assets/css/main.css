@@ -126,6 +126,7 @@ input, select, textarea {
 		}
 
 	h2 {
+		color: #ffffff;
 		font-size: 2em;
 		letter-spacing: -1px;
 	}
@@ -135,7 +136,8 @@ input, select, textarea {
 		}
 
 			h2.alt strong {
-				color: #666;
+				color: #ffffff;
+				font-size: 1.7em;
 			}
 
 	h3 {
@@ -2030,6 +2032,57 @@ input, select, textarea {
 		.icon.brands:before {
 			font-family: 'Font Awesome 5 Brands';
 		}
+		.icon.fa-instagram {
+            font-weight: bold;
+            font-size: 24px;
+            background: linear-gradient(45deg, #fdc468, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            transition: color 0.3s ease; 
+        }
+        
+        
+        .icon.fa-linkedin {
+            color: #0066ff;  
+            font-size: 24px; 
+            transition: color 0.3s ease;
+        }
+        .icon.fa-linkedin:hover {
+            color: #3e00dd; 
+        }
+        
+        
+        .icon.fa-github {
+            color: #333333;  
+            font-size: 24px;  
+            transition: color 0.3s ease;
+        }
+        .icon.fa-github:hover {
+            color: #c2b378; 
+        }
+        
+        
+    
+        .icon.fa-instagram:hover {
+            color: #3f729b;
+        }
+        
+        .music_insta_text{
+            color:#ffffff;
+        }
+        
+        /* MOBILE */
+        /* touched on mobile */
+        .icon.fa-instagram:active {
+            color: #29a1c3; 
+        }
+        
+        /* tapped on mobile */
+        .icon.fa-instagram:focus {
+            color: #29a1c3; 
+        }
+
 
 /* Header */
 
@@ -2177,7 +2230,7 @@ input, select, textarea {
 	#footer {
 		margin-left: 375px;
 		text-align: center;
-		background-color: #dce3e2;
+		background-color: #000;
 		padding: 3em 0 4em 0;
 		box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.05), inset 0 0.1em 0.1em 0 rgba(0, 0, 0, 0.025);
 		font-size: 0.8em;
@@ -2252,11 +2305,11 @@ input, select, textarea {
 			}
 
 			#main > section.two {
-				background-color: #f5fafa;
+				background-color: #000;
 			}
 
 			#main > section.three {
-				background-color: #ecf1f1;
+				background-color: #000;
 			}
 
 			#main > section.four {
@@ -2631,3 +2684,115 @@ input, select, textarea {
 				}
 
 	}
+
+.circle {
+	height: 24px;
+	width: 24px;
+	border-radius: 24px;
+	background-color: black;
+	position: fixed; 
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	z-index: 99999999; 
+	}
+
+  /* Animated lines container spanning both sections */
+  .lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200vh;
+    pointer-events: none;
+    z-index: -1; 
+}
+
+.line {
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.line::after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 15vh;
+    width: 100%;
+    top: -50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+    animation: drop 7s infinite cubic-bezier(0.4, 0.26, 0, 0.97);
+}
+
+/* Line positioning and animation delays */
+.line:nth-child(1) { left: 25%; }
+.line:nth-child(1)::after { animation-delay: 2s; }
+
+.line:nth-child(2) { left: 50%; }
+.line:nth-child(3) { left: 75%; }
+.line:nth-child(3)::after { animation-delay: 2.5s; }
+
+/* Drop animation */
+@keyframes drop {
+    0% { top: -50%; }
+    100% { top: 110%; }
+}
+
+/* Section styles */
+#top, #about {
+    position: relative;
+    background: #000;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Ensure text stays above animation */
+.container, header, footer {
+    position: relative;
+    z-index: 1;
+}
+
+
+
+@media (max-width: 768px) {
+    .icon.fa-instagram {
+        font-size: 28px;  
+    }
+}
+
+@media (max-width: 480px) {
+    .icon.fa-instagram {
+        font-size: 24px;  
+    }
+}
+
+
+.smiley {
+    font-size: 40px;  
+    /* visibility: hidden;   */
+    position: absolute; 
+    top: 50%;  
+    left: 50%;  
+    opacity: 0;
+    pointer-events: none; 
+    transform: translate(-50%, -50%);  
+    transition: opacity 0.5s ease-in;
+}
+
+
+.image.avatar48:hover .smiley {
+    /* visibility: visible;   */
+    opacity: 1;
+}
+
+@keyframes stayVisible {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
