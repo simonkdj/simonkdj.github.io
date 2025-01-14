@@ -24,6 +24,34 @@
     </head>
     <body class="is-preload">
 		
+
+		<script src="https://www.youtube.com/iframe_api"></script>
+		<script src="assets/js/youtubeplayer.js"></script>
+		
+		<!-- <button class="music-button" onclick="togglePlay()">🎵</button> -->
+
+		<!-- <div class="outer">
+			<button class="music-button" id="volume" onclick="togglePlay()">🎵</button>
+		</div> -->
+
+		<div class="outer">
+			<button class="promo__video-controls button-volume" id="volume" onclick="togglePlay()"></button>
+		  </div>
+
+		<iframe 
+			id="youtube-player"
+			width="560" 
+			height="315" 
+			src="https://www.youtube.com/embed/gpVM2f1y6Fg?si=yJ64KW3PG4XnLC0u&controls=0&start=917&enablejsapi=1" 
+			frameborder="0" 
+			allow="autoplay; encrypted-media" 
+			referrerpolicy="strict-origin-when-cross-origin" 
+			style="display:none;">
+		</iframe>
+
+
+
+
         <!-- Header -->
         <div class="circle"></div>
 			<div class="circle"></div>
@@ -85,9 +113,10 @@
                 </div>
 
             </div>
-
+		
         <!-- Main -->
             <div id="main">
+
                 <!-- Intro -->
                     <section id="top" class="cov">
                         
@@ -96,9 +125,12 @@
                             <div class="line"></div>
                             <div class="line"></div>
                             <header>
-                                <h2 class="alt"><strong>Gunhui Kim</strong>, a data enthusiast experienced in <br>Python, SQL, and Pytorch. <br> </h2>
-                            
+                                <h2 class="alt"><strong>Gunhui Kim</strong><hmy class ="words",>
+									a data enthusiast experienced in <br>Python, SQL, and Pytorch. <br> 
+								</hmy> </h2>
+								
                             </header>
+							
 
                             <!-- <footer>
                                 <a href="#portfolio" class="button scrolly">View my work</a>
@@ -112,10 +144,10 @@
                             <header>
                                 <h2 class = "projj">My Projects</h2>
                             </header>
-    
-                            <p>I explored wide a variety of projects dealing with Data Science, Data Analytics, Machine Learning, and LLM utilizing Python, SQL, Tableau, 
-                                Pandas, NumPy, Scikit-Learn(my favorite), Matplotlib, Seaborn, Pytorch, Snowflake, Databricks, etc.
-                            </p>
+								<hmy class = "words"><p>I explored wide a variety of projects dealing with Data Science, Data Analytics, Machine Learning, and LLM utilizing Python, SQL, Tableau, 
+									Pandas, NumPy, Scikit-Learn(my favorite), Matplotlib, Seaborn, Pytorch, Snowflake, Databricks, etc.
+								</p></hmy>
+                            
     
                             <div class="row">
                                 <div class="col-4 col-12-mobile">
@@ -197,9 +229,9 @@
 
                             <a href="#" class="image fit"><img src="" alt="" /></a>                     
                             <!-- <a href="#" class="image fit"><img src="images/AboutmePic.jpg" alt="" /></a> -->
-                            <p><h4>I am a creator. Whether professionally or casually, I always look for opportunies to realize my ideas. 
+                            <p><hmy class="words">I am a creator. Whether professionally or casually, I always look for opportunies to realize my ideas. 
                                 My recent interests are Deep Neural Networks, Virtual Reality, and Metaverse. In addition, as an artist since the age of six,
-                            I am particularly excited about what artificial intelligence has to offer for the advancement of music. Feel free to check out some of my favorite song arrangements below!</h2></p>
+                            I am particularly excited about what artificial intelligence has to offer for the advancement of music. Feel free to check out some of my favorite song arrangements below!</hmy></p>
                             <p class="music_insa_text">
                                 simo_nmusic
                             <a href="https://www.instagram.com/simo_nmusic/" class="icon brands fa-instagram">
@@ -234,6 +266,14 @@
             <script src="assets/js/main.js"></script>
             <script src="assets/js/mouseani.js"></script>
             <script src="assets/js/smiley.js"></script>
+
+			<script>
+				$(function(){
+				$('.button-volume').click(function () {
+					$('.button-volume').toggleClass("mute");
+				});
+				});
+			</script>
 
     </body>
 </html>

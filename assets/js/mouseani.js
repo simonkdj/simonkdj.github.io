@@ -60,3 +60,14 @@ function animateCircles() {
 }
 
 animateCircles();
+
+function isTouchDevice() {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+}
+
+if (isTouchDevice()) {
+    const circles = document.querySelectorAll(".circle");
+    circles.forEach(circle => {
+        circle.style.display = "none"; // Hides the circles
+    });
+}
