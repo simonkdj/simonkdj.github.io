@@ -1733,7 +1733,7 @@ input, select, textarea {
 /* Sections/Article */
 
 	section, article {
-		margin-bottom: 3em;
+		margin-bottom: 1em;
 	}
 
 		section > :last-child,
@@ -2270,7 +2270,7 @@ article.item header {
 		#main > section {
 			margin: 0;
 			overflow: hidden;
-			padding: 4em 0;
+			padding: 3.5em 0;
 			box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.05), inset 0 0.1em 0.1em 0 rgba(0, 0, 0, 0.025);
 			text-align: center;
 			background-image: url("images/overlay.png");
@@ -2312,6 +2312,7 @@ article.item header {
 
 			#main > section.two {
 				background-color: #000;
+				margin: 0;
 			}
 
 			#main > section.three {
@@ -2319,7 +2320,7 @@ article.item header {
 			}
 
 			#main > section.four {
-				background-color: #e8edec;
+				background-color: #000000;
 			}
 
 /* Wide */
@@ -2359,7 +2360,7 @@ article.item header {
 		/* Main */
 
 			#main > section {
-				padding: 3em 0;
+				padding: 2em 0;
 			}
 
 			#main section.cover {
@@ -2747,7 +2748,7 @@ article.item header {
 }
 
 /* Section styles */
-#top, #about {
+#top, #about{
     position: relative;
     background: #000;
     overflow: hidden;
@@ -2851,6 +2852,51 @@ hmy {
 	font-family: "Lucida Console", "Courier New", monospace;
 }
 
+#tech-stack {
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 20em;
+    background-color: #000; 
+    /* padding: 5em;  */
+	}
+ 
 
+.tech-stack-title {
+    font-size: 2em;
+    /* margin-bottom: 10em;
+	padding: 5em; */
+    color: #e6e6e6; /* Light text for contrast */
+    background-color: #000; /* Ensures the header stays black */
+}
+
+.tech-stack-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    gap: 1.5em; /* Adjusted spacing for consistent vertical and horizontal gaps */
+    justify-items: center; /* Centers items horizontally */
+    align-items: center; /* Centers items vertically */
+    background-color: #000; /* Grid container stays black */
+}
+
+.icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #000; /* Ensures wrappers blend into the black background */
+}
+
+.tech-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain; /* Ensures the image fits nicely */
+    margin-bottom: 0em; /* Space between the icon and the label */
+}
+
+.icon-wrapper p {
+    font-size: 0.9em;
+    color: #e6e6e6; /* Light text color for contrast */
+    margin: 0; /* Remove default margin to keep the spacing consistent */
+}
 
 
