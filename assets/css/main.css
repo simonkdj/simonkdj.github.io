@@ -2865,17 +2865,17 @@ hmy {
     font-size: 2em;
     /* margin-bottom: 10em;
 	padding: 5em; */
-    color: #e6e6e6; /* Light text for contrast */
-    background-color: #000; /* Ensures the header stays black */
+    color: #e6e6e6; 
+    background-color: #000; 
 }
 
 .tech-stack-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 columns */
-    gap: 1.5em; /* Adjusted spacing for consistent vertical and horizontal gaps */
-    justify-items: center; /* Centers items horizontally */
-    align-items: center; /* Centers items vertically */
-    background-color: #000; /* Grid container stays black */
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 1.5em; 
+    justify-items: center;
+    align-items: center; 
+    background-color: #000; 
 }
 
 .icon-wrapper {
@@ -2883,20 +2883,30 @@ hmy {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background-color: #000; /* Ensures wrappers blend into the black background */
+    background-color: #000;
 }
 
 .tech-icon {
     width: 60px;
     height: 60px;
-    object-fit: contain; /* Ensures the image fits nicely */
-    margin-bottom: 0em; /* Space between the icon and the label */
+    object-fit: contain; 
+    margin-bottom: 0em;
 }
 
 .icon-wrapper p {
     font-size: 0.9em;
-    color: #e6e6e6; /* Light text color for contrast */
-    margin: 0; /* Remove default margin to keep the spacing consistent */
+    color: #e6e6e6; 
+    margin: 0; 
 }
 
+@media (max-width: 768px) {
+	.tech-stack-grid {
+		grid-template-columns: repeat(5, 1fr);
+	}
+}
 
+@media (max-width: 480px) {
+	.tech-stack-grid {
+		grid-template-columns: repeat(4, 1fr); 
+	}
+}
