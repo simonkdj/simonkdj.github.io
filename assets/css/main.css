@@ -2056,6 +2056,9 @@ article.item header {
             color: #0066ff;  
             font-size: 24px; 
             transition: color 0.3s ease;
+			bottom: 30px;
+			left: 80px;
+			position: fixed;
         }
         .icon.fa-linkedin:hover {
             color: #3e00dd; 
@@ -2066,6 +2069,9 @@ article.item header {
             color: #333333;  
             font-size: 24px;  
             transition: color 0.3s ease;
+			bottom: 30px;
+			left: 160px;
+			position:fixed;
         }
         .icon.fa-github:hover {
             color: #c2b378; 
@@ -2445,7 +2451,7 @@ article.item header {
 		display: none;
 	}
 
-	@media screen and (max-width: 960px) {
+	@media screen and (max-width: 2000px) {
 
 		/* Basic */
 
@@ -2751,7 +2757,7 @@ article.item header {
 }
 
 /* Section styles */
-#top, #about{
+#top, #about #tech-stack{
     position: relative;
     background: #000;
     overflow: hidden;
@@ -2769,12 +2775,18 @@ article.item header {
 @media (max-width: 768px) {
     .icon.fa-instagram {
         font-size: 28px;  
+		position: fixed;
+		bottom: 30px;
+		left: 30px;
     }
 }
 
 @media (max-width: 480px) {
     .icon.fa-instagram {
         font-size: 24px;  
+		position: fixed;
+		bottom: 30px;
+		left: 30px;
     }
 }
 
@@ -2940,5 +2952,4 @@ hmy {
     height: 300px; 
     object-fit: cover; 
 }
-
 
