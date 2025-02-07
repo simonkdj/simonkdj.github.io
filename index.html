@@ -21,6 +21,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="assets/css/main.css" />
+
     </head>
     <body class="is-preload">
 		
@@ -158,22 +159,21 @@
                             <div class="row">
                                 <div class="col-4 col-12-mobile">
                                     
-                                    <!-- Original Spot for IU project from article to article.-->
+                                    <article class="item">
+                                        <a href="#" class="image fit"><img src="images/emp_churn.jpg" alt="" /></a>
+                                        <header>
+                                            <a href="https://lookerstudio.google.com/reporting/b129178c-7f08-4225-b2d5-4b4d05482285">
+                                                <h3><Strong>Employee Churn Data Analytics</Strong></a></h3>
+                                        </header>
+                                    </article>
+
 									<article class="item">
                                         <a href="#" class="image fit"><img src="images/github_logo.jpg" alt="" /></a>
                                         <header>
                                             <h3><a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/Git-Committed_DNN_Model.md"></h3>
                                             <Strong>Git-Committed DNN Model for Fault Classification</Strong></a></h3>
-                                        </header>
+                                        </header>        
                                     
-                                    
-                                    <article class="item">
-                                        <a href="#" class="image fit"><img src="images/property.jpg" alt="" /></a>
-                                        <header>
-                                            <a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/Property_Assessment_Program.md">
-                                                <h3><Strong>Property Assessment Program</Strong></a></h3>
-                                        </header>
-                                    </article>
                                 </div>
                                 <div class="col-4 col-12-mobile">
                                     <article class="item">
@@ -191,7 +191,7 @@
 										<a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/Retail_Banking_Spark.ipynb"><h3>
 											<Strong>Retail Banking Apache Spark Project
 										</Strong></a></h3>
-								</article> 
+								    </article> 
                                 </div>
                                 <div class="col-4 col-12-mobile">
                                     <!-- INSERTED HERE -->
@@ -218,9 +218,73 @@
                                     </article> -->
                                 </div>
                             </div>
+
+
+                            <span id="more" >
+                            
+                                <!-- INSERTED HERE -->
+                            
+                                <div class="row">
+                                    
+                                     
+                                    <div class="col-4 col-12-mobile">
+                                        <!-- INSERTED HERE -->
+                                        <article class="item">
+                                            <a href="#" class="image fit"><img src="images/property.jpg" alt="" /></a>
+                                            <header>
+                                                <a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/Property_Assessment_Program.md">
+                                                    <h3><Strong>Property Assessment Program</Strong></a></h3>
+                                            </header>
+                                        </article>
+                                    </div>
+                                    <!-- <div class="col-4 col-12-mobile">
+                                        <article class="item">
+                                            <a href="#" class="image fit"><img src="images/cats.jpg" class = "consistent-image" alt="" /></a>
+                                            <header>
+                                                <h3><a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/VIT_MAE.md"></h3>
+                                                    <Strong>Computer Vision Project</Strong></a></h3>
+                                            </header>
+                                        </article>
+                                    </div>
+                                    <div class="col-4 col-12-mobile">
+                                        <article class="item">
+                                            <a href="#" class="image fit"><img src="images/bank.jpg"  alt="" /></a>
+                                            <header>
+                                                <a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/Retail_Banking_Spark.ipynb"><h3>
+                                                    <Strong>Retail Banking Apache Spark Project
+                                                </Strong></a></h3>
+                                            </article> 
+                                            
+                                    </div> -->
+                                </div>
+                        </span>
     
                         </div>
+                        
+                        <button class = "view-container" onclick="toggleText()" id="myBtn">View more</button>
                     </section>
+                    
+
+                    
+
+                    
+                    
+
+                    <script>
+                    function toggleText() {
+                    var moreText = document.getElementById("more");
+                    var btnText = document.getElementById("myBtn");
+
+                    if (moreText.style.display === "none" || moreText.style.display === "") {
+                        moreText.style.display = "inline";
+                        btnText.innerHTML = "Collapse"; 
+                    } else {
+                        moreText.style.display = "none";
+                        btnText.innerHTML = "View more"; 
+                    }
+                    }
+                    </script>
+                                        
                     
 
                     <!-- Tech Stack -->
@@ -311,6 +375,26 @@
                                 <div class="icon-wrapper">
                                     <img src="assets/SVGs/figma.svg" alt="figma" class="tech-icon">
                                     <p>Figma</p>
+                                </div>
+                                <div class="icon-wrapper">
+                                    <img src="assets/SVGs/bigquery.svg" alt="figma" class="tech-icon">
+                                    <p>BigQuery</p>
+                                </div>
+                                <div class="icon-wrapper">
+                                    <img src="assets/SVGs/GCP.svg" alt="figma" class="tech-icon">
+                                    <p>GCP</p>
+                                </div>
+                                <div class="icon-wrapper">
+                                    <img src="assets/SVGs/looker.svg" alt="figma" class="tech-icon">
+                                    <p>Looker</p>
+                                </div>
+                                <div class="icon-wrapper">
+                                    <img src="assets/SVGs/unsloth-2.svg" alt="figma" class="tech-icon">
+                                    <p>Unsloth</p>
+                                </div>
+                                <div class="icon-wrapper">
+                                    <img src="assets/SVGs/pycaret.svg" alt="figma" class="tech-icon">
+                                    <p>Pycaret</p>
                                 </div>
                                 
                             </div>

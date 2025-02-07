@@ -1776,6 +1776,9 @@ article.item header {
 		.image.fit {
 			display: block;
 			width: 100%;
+			/* height: 200px;  */
+			/* object-fit:cover; Scales images down without cropping */
+			background-color: white; 
 		}
 
 		.image.featured {
@@ -2910,3 +2913,32 @@ hmy {
 		grid-template-columns: repeat(4, 1fr); 
 	}
 }
+
+
+#more {
+	display: none;
+	text-align: center;
+	align-items: center;
+	background-color: #000;
+
+}
+
+#myBtn {
+    display:flex;  
+    margin: 20px auto; 
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 10px 20px; 
+	border: 1px solid white;
+    
+}
+
+
+.consistent-image {
+    width: 110%;
+    height: 300px; 
+    object-fit: cover; 
+}
+
+
