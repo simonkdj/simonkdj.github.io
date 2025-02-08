@@ -2772,7 +2772,7 @@ article.item header {
 
 
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .icon.fa-instagram {
         font-size: 28px;  
 		position: fixed;
@@ -2788,7 +2788,7 @@ article.item header {
 		bottom: 30px;
 		left: 30px;
     }
-}
+} */
 
 
 .smiley {
