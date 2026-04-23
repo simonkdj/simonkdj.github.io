@@ -1,488 +1,1935 @@
-<!DOCTYPE HTML>
-<!--
-    Prologue by HTML5 UP
-    html5up.net | @ajlkn
-    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-    <head>
-        <script>
-            (function (c, s, q, u, a, r, e) {
-                c.hj=c.hj||function(){(c.hj.q=c.hj.q||[]).push(arguments)};
-                c._hjSettings = { hjid: a };
-                r = s.getElementsByTagName('head')[0];
-                e = s.createElement('script');
-                e.async = true;
-                e.src = q + c._hjSettings.hjid + u;
-                r.appendChild(e);
-            })(window, document, 'https://static.hj.contentsquare.net/c/csq-', '.js', 5258743);
-        </script>
-        <title>Gunhui's Portfolio</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="assets/css/main.css" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gunhui Kim — Data Scientist</title>
+  <meta name="description" content="Gunhui Kim — Data Scientist & ML Engineer, Berkeley CA" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:       #000000;
+      --surface:  #0c0a1a;
+      --surface2: #12102a;
+      --gold:     #f5c87a;
+      --gold2:    #ffdea0;
+      --violet:   #a78bde;
+      --rose:     #f0a0b8;
+      --text:     #e8e0d8;
+      --muted:    rgba(232,224,216,0.45);
+      --border:   rgba(245,200,122,0.10);
+      --border2:  rgba(245,200,122,0.22);
+      --ease:     cubic-bezier(0.22,1,0.36,1);
+      --font-h:   'Cormorant Garamond', Georgia, serif;
+      --font-b:   'Nunito', sans-serif;
+      --font-m:   'DM Mono', monospace;
+    }
 
-    </head>
-    <body class="is-preload">
-		
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 
-		<script src="https://www.youtube.com/iframe_api"></script>
-		<script src="assets/js/youtubeplayer.js"></script>
-		
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-b);
+      font-weight: 300;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
 
-        <!-- YOUTUBE VIDEO EMBEDDED -->
-		<!-- <div class="outer">
-			<button class="promo__video-controls button-volume" id="volume" onclick="togglePlay()"></button>
-		  </div>
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); opacity: .5; border-radius: 1px; }
 
-		<iframe 
-			id="youtube-player"
-			width="560" 
-			height="315" 
-			src="https://www.youtube.com/embed/gpVM2f1y6Fg?si=yJ64KW3PG4XnLC0u&controls=0&start=917&enablejsapi=1" 
-			frameborder="0" 
-			allow="autoplay; encrypted-media" 
-			referrerpolicy="strict-origin-when-cross-origin" 
-			style="display:none;">
-		</iframe> -->
+    /* Cursor */
+    #cur { position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform .1s; }
+    #cur-inner { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; transition: width .2s var(--ease), height .2s var(--ease); }
+    #cur-outer { position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); width: 24px; height: 24px; border: 1px solid rgba(245,200,122,.35); border-radius: 50%; transition: width .25s var(--ease), height .25s var(--ease), opacity .2s; }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; height: 58px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem,5vw,4rem);
+      background: rgba(6,5,14,0.75);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+    }
+    .nav-logo { font-family: var(--font-h); font-size: 1.35rem; font-weight: 400; color: var(--gold2); text-decoration: none; letter-spacing: .04em; font-style: italic; }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-family: var(--font-m); font-size: .9rem; letter-spacing: .12em; text-transform: lowercase; color: white; text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-right { display: flex; gap: .75rem; }
+    .nav-right a { font-family: var(--font-m); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: .3rem .8rem; border-radius: 20px; border: 1px solid var(--border); transition: color .2s, border-color .2s; }
+    .nav-right a:hover { color: var(--gold); border-color: var(--border2); }
+
+    /* Hero — tall scroll tunnel into space */
+    #hero { position: relative; height: 500vh; min-height: 580px; }
+    /* Sticky canvas — stays locked to viewport while hero scroll space travels */
+    #hero-canvas { position: sticky; top: 0; display: block; width: 100%; height: 100vh; z-index: 0; transition: opacity 0.08s linear; }
+
+    /* Hero UI — overlays the sticky canvas, also sticky */
+    #hero-ui {
+      position: sticky; top: 0; height: 100vh;
+      margin-top: -100vh;           /* pulls up to overlap canvas */
+      z-index: 2; pointer-events: none;
+      display: flex; align-items: center;
+    }
+    #hero-ui > * { pointer-events: auto; }
+
+    /* Radial vignette */
+    #hero-ui::before {
+      content: ''; position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse 90% 90% at 50% 50%, transparent 40%, rgba(0,0,0,.55) 100%);
+      pointer-events: none;
+    }
+    /* Bottom gradient */
+    #hero-ui::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px; z-index: 0;
+      background: linear-gradient(transparent 0%, rgba(18,10,4,0.5) 60%, var(--bg) 100%);
+      pointer-events: none;
+    }
+
+    /* Space fade — full black overlay that fades in at end of scroll tunnel */
+    #space-fade {
+      position: sticky; bottom: 0; height: 100vh;
+      margin-top: -100vh;
+      background: #000;
+      z-index: 3; pointer-events: none;
+      opacity: 0;
+    }
+
+    /* Warm glow rising from below — like lanterns launching */
+    #hero-glow {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 35%; z-index: 1;
+      background: radial-gradient(ellipse 90% 100% at 50% 100%, rgba(255,140,30,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 clamp(2rem,7vw,6rem);
+      max-width: 680px;
+    }
+    .hero-label {
+      font-family: var(--font-m); font-size: .68rem; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--gold); opacity: .75;
+      margin-bottom: 1.5rem; display: flex; align-items: center; gap: .6rem;
+      opacity: 0; animation: up .7s var(--ease) .1s both;
+    }
+    .hero-label-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); animation: glow 2.5s ease infinite; }
+    @keyframes glow { 0%,100%{opacity:1;box-shadow:0 0 6px var(--gold)} 50%{opacity:.3;box-shadow:none} }
+
+    h1.hero-name {
+      font-family: var(--font-h);
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      font-weight: 300; line-height: .95;
+      letter-spacing: -.01em; color: var(--text);
+      opacity: 0; animation: up .9s var(--ease) .22s both;
+    }
+    h1.hero-name em { font-style: italic; color: var(--gold2); }
+
+    .hero-role {
+      font-family: var(--font-h); font-size: 1.7rem;
+      font-weight: 300; font-style: italic;
+      color: whitesmoke; margin: 1rem 0 1.5rem; letter-spacing: .02em;
+      opacity: 0; animation: up .8s var(--ease) .38s both;
+    }
+    .hero-bio { font-size: .95rem; color: var(--gold2); max-width: 440px; line-height: 1.9; opacity: 1; animation: up .8s var(--ease) .52s both; }
+
+    .hero-cta {
+      margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap:nowrap;
+      opacity: 0; animation: up .8s var(--ease) .66s both;
+    }
+    .btn-warm {
+      font-family: var(--font-m); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+      background: var(--gold); color: #06050e;
+      padding: .8rem 1.8rem; border-radius: 40px; text-decoration: none;
+      transition: opacity .2s, transform .25s var(--ease);
+    }
+    .btn-warm:hover { opacity: .85; transform: translateY(-3px); }
+    .btn-outline {
+      font-family: var(--font-m); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+      border: 1px solid var(--border2); color: var(--text);
+      padding: .8rem 1.8rem; border-radius: 40px; text-decoration: none;
+      transition: border-color .2s, color .2s, transform .25s var(--ease);
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-3px); }
+
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      font-family: var(--font-m); font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--muted); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: .6rem;
+      opacity: 0; animation: up .8s var(--ease) 1.1s both;
+      pointer-events: none;
+    }
+    .scroll-line { width: 1px; height: 36px; background: linear-gradient(var(--gold), transparent); animation: scrollpulse 2s ease infinite; }
+    @keyframes scrollpulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+    /* Sections */
+    section { padding: 6rem clamp(1.5rem,6vw,5rem); position: relative; }
+    .sec-label { font-family: var(--font-m); font-size: .65rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); opacity: .65; margin-bottom: .9rem; }
+    .sec-title { font-family: var(--font-m); font-size: 3rem; font-weight: 300; letter-spacing: .01em; color: var(--gold2); margin-bottom: .6rem; }
+    .sec-title em { font-style: italic; color: var(--gold2); }
+    .sec-sub { font-size: 1rem; color: gainsboro; max-width: 640px; line-height: 1.9; margin-bottom: 3.5rem; font-family: var(--font-m); }
+
+    /* Projects */
+    #projects { background: var(--bg); }
+    .projects-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+    .project-card {
+      background: var(--surface); padding: 2rem 2rem;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; gap: .5rem;
+      position: relative;
+      border: 1px solid var(--border); border-radius: 14px;
+      will-change: transform;
+      transform: perspective(900px) rotateX(0deg) rotateY(0deg) scale(1);
+      transition: box-shadow .35s, border-color .3s;
+    }
+    .project-card:hover {
+      border-color: var(--border2);
+      box-shadow: 0 24px 60px rgba(0,0,0,.55), 0 0 28px rgba(245,200,122,.07);
+    }
+    .card-glare {
+      position: absolute; inset: 0; border-radius: 14px;
+      background: radial-gradient(circle at var(--gx,50%) var(--gy,50%), rgba(255,220,120,.13) 0%, transparent 55%);
+      pointer-events: none; z-index: 1; opacity: 0; transition: opacity .3s;
+    }
+    .project-card:hover .card-glare { opacity: 1; }
+    .project-num { font-family: var(--font-m); font-size: .62rem; letter-spacing: .18em; color: var(--gold); opacity: .5; }
+    .project-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; margin: .6rem 0; filter: saturate(.6) brightness(.75); transition: filter .4s; }
+    .project-card:hover .project-img { filter: saturate(.9) brightness(.9); }
+    .project-title { font-family: var(--font-b); font-size: .95rem; font-weight: 400; color: var(--text); line-height: 1.45; }
+    .project-pills { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .2rem; }
+    .pill { font-family: var(--font-m); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--violet); background: rgba(167,139,222,.1); border: 1px solid rgba(167,139,222,.2); padding: .18rem .55rem; border-radius: 20px; }
+    .project-arrow { position: absolute; top: 1.4rem; right: 1.5rem; font-size: .8rem; color: var(--gold); opacity: 0; transform: translate(0,2px); transition: opacity .2s, transform .2s; }
+    .project-card:hover .project-arrow { opacity: 1; transform: translate(2px,-2px); }
+
+    .more-wrap { text-align: center; margin-top: 2.25rem; }
+    #view-more-btn {
+      font-family: var(--font-m); font-size: .7rem; letter-spacing: .13em; text-transform: uppercase;
+      background: transparent; border: 1px solid var(--border2); color: var(--muted);
+      padding: .65rem 1.8rem; border-radius: 40px;
+      transition: color .2s, border-color .2s;
+    }
+    #view-more-btn:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* Tech Stack */
+    #tech-stack { background: black; }
+    .tech-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: .5rem 0; margin-top: 1rem; }
+    .tech-item { display: flex; flex-direction: column; align-items: center; gap: .55rem; padding: 1.2rem .4rem; border-radius: 10px; transition: background .2s; }
+    .tech-item:hover { background: rgba(255,255,255,.06); }
+    .tech-item img { width: 60px; height: 60px; object-fit: contain; transition: transform .25s; }
+    .tech-item:hover img { transform: scale(1.14); }
+    .tech-item span { font-family: var(--font-m); font-size: .9rem; letter-spacing: .06em; color:white; text-align: center; line-height: 1.3; }
+
+    /* About */
+    #about { background: #f4f3f8; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-text p { font-size: .95rem; color: var(--muted); margin-bottom: 1.2rem; line-height: 1.95; }
+    .about-text strong { color: var(--text); font-weight: 400; }
+    .about-music-block {
+      margin-top: 2rem; padding: 1.1rem 1.4rem;
+      background: var(--surface); border-radius: 12px;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .music-icon { width: 36px; height: 36px; border-radius: 50%; background: rgba(245,200,122,.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .music-icon svg { width: 16px; height: 16px; }
+    .music-info p { font-family: var(--font-m); font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: .2rem; }
+    .music-info a { font-family: var(--font-b); font-size: .9rem; color: var(--gold); text-decoration: none; transition: opacity .2s; }
+    .music-info a:hover { opacity: .7; }
+
+    /* About visual — warm glowing orb composition */
+    .about-visual {
+      position: relative; height: 360px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .orb-ring {
+      position: absolute; border-radius: 50%; border: 1px solid;
+      animation: spin linear infinite;
+    }
+    .orb-ring:nth-child(1) { width:240px;height:240px; border-color:rgba(245,200,122,.12); animation-duration:30s; }
+    .orb-ring:nth-child(2) { width:320px;height:320px; border-color:rgba(167,139,222,.08); animation-duration:48s; animation-direction:reverse; }
+    .orb-ring:nth-child(3) { width:180px;height:180px; border-color:rgba(240,160,184,.09); animation-duration:22s; }
+    @keyframes spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+    .orb-center {
+      width: 90px; height: 90px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,200,122,.18) 0%, transparent 70%);
+      display: flex; align-items: center; justify-content: center; z-index: 1;
+      box-shadow: 0 0 40px rgba(245,200,122,.08);
+    }
+    .orb-initials { font-family: var(--font-h); font-size: 1.8rem; font-weight: 300; font-style: italic; color: var(--gold); opacity: .8; }
+    .about-loc { position: absolute; bottom: .5rem; right: 0; font-family: var(--font-m); font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); padding: 2rem clamp(1.5rem,6vw,5rem); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-family: var(--font-m); font-size: .62rem; letter-spacing: .1em; color: var(--muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-family: var(--font-m); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── Experience Timeline ── */
 
 
-        
-        <!-- embeded link to an instagram post -->
-        <!-- <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/POST_ID/" data-instgrm-version="14"></blockquote>
-        <script async src="//www.instagram.com/embed.js"></script> -->
+    .timeline {
+      position: relative;
+      max-width: 1150px;
+      margin-top: 3rem;
+    }
+    /* Vertical spine */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 1px;
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--border2) 8%,
+        var(--border2) 92%,
+        transparent
+      );
+    }
 
+    .tl-item {
+      position: relative;
+      padding: 0 0 3.2rem 2.6rem;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
 
+    /* Dot on the spine */
+    .tl-dot {
+      position: absolute;
+      left: -5px; top: 7px;
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1.5px solid var(--gold);
+      box-shadow: 0 0 8px rgba(245,200,122,.25);
+      transition: background .25s, box-shadow .25s;
+    }
+    .tl-item:hover .tl-dot {
+      background: var(--gold);
+      box-shadow: 0 0 16px rgba(245,200,122,.55);
+    }
 
+    /* Connector line from dot down to next dot */
+    .tl-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 18px; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
 
-        <!-- Header -->
-        <!-- <div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div>
-			<div class="circle"></div> -->
-
-
-            <div id="header">
-                
-                
-                <div class="top">
-
-                    
-                        <div id="logo">
-                            <span class="image avatar48">
-                                <img src="images/AboutmePic.jpg" alt="" />
-                                <span class="smiley">&#128522;</span>
-                            </span>
-                            <h1 id="title">Gunhui Kim</h1>
-                            <p> Berkeley, CA</p>
-                        </div>
-
-                    
-                        <nav id="nav">
-                            <ul>
-                                <!-- <li><a href="#top" id="top-link"><span class="icon solid fa-home">Intro</span></a></li> -->
-                                <!-- <li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-th">Portfolio</span></a></li> -->
-                                <li><a href="#portfolio" id="about-link"><span >Projects</span></a></li>
-                                <li><a href="#tech-stack" id="about-link"><span >Tech Stack</span></a></li>
-                                <li><a href="#about" id="about-link"><span >About Me</span></a></li>
-                            
-                                <!-- <li><a href="#contact" id="contact-link"><span class="icon solid fa-envelope">Contact</span></a></li> -->
-                            </ul>
-                        </nav>
-
-                </div>
-
-                <div class="bottom">
-                    
-                    <!-- Social Icons -->
-                        <ul class="icons">
-                            <li><a href="https://github.com/simonkdj" class="icon brands fa-github">
-                                <span class="label">Github</span></a></li>
-                            <li><a href="https://www.linkedin.com/in/linkgunhui/" class="icon brands fa-linkedin">
-                                <span class="label">LinkedIn</span>
-                              </a></li>
-                        </ul>
-                        
-                </div>
-
-            </div>
-		
-        <!-- Main -->
-            <div id="main">
-
-                <!-- Intro -->
-                    <section id="top" class="cov">
-                        
-                        <div class="container">
-                            <div class="line"></div>
-                            <div class="line"></div>
-                            <div class="line"></div>
-                            <header>
-                                <h2 class="alt"><strong>Gunhui Kim, </strong><hmy class ="words",>
-									a data scientist/analyst experienced in Python, SQL, and Pytorch. 
-								</hmy> </h2>
-								
-                            </header>
-							
-
-                            <!-- <footer>
-                                <a href="#portfolio" class="button scrolly">View my work</a>
-                            </footer> -->
-
-                        </div>
-                    </section>
-                    <section id="portfolio" class="two">
-                        <div class="container">
+    .tl-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      gap: 2.5rem;
+      width: 100%;
+    }
+    .tl-body { flex: 1; min-width: 0; overflow: hidden; }
+/*
+    .tl-logo {
+      margin-left: -22rem;
+      flex-shrink: 0;
+      width: 140px; height: 140px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: radial-gradient(
+        circle at 20% 20%,
+        rgba(255,241,241,0.694),
+        rgba(228,228,228,0.66) 55%,
+        rgba(255,255,255,0.346)
+      );
+      box-shadow: 0 0 22px rgba(255,255,255,0.18), inset 0 0 10px rgba(255,255,255,0.08);
+      display: flex; align-items: flex-start; justify-content: center;
+      overflow: hidden;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .tl-item:hover .tl-logo {
+      box-shadow: 0 0 32px rgba(255,255,255,0.28), inset 0 0 14px rgba(255,255,255,0.12);
+    }
+    .tl-logo img {
+      
+      width: 100%; height: 100%;
+      object-fit: contain;
+      filter: brightness(1.1);
+      transition: filter .25s;
+      flex-shrink: 0;
+      
+    }
+    .tl-item:hover .tl-logo img { filter: brightness(1.25); }
     
-                            <header>
-                                <h2 class = "projj">My Projects</h2>
-                            </header>
-								<hmy class = "words"><p>I explored a wide variety of projects dealing with Data Science, Data Analytics, Machine Learning, and LLM utilizing Python, SQL, Tableau, 
-									Pandas, NumPy, Scikit-Learn(my favorite), Matplotlib, Seaborn, Excel, Pytorch, Snowflake, Databricks, etc.
-								</p></hmy>
-                            
     
-                            <div class="row">
-                                <div class="col-4 col-12-mobile">
-                                    
-                                    <article class="item">
-                                        <a href="https://lookerstudio.google.com/reporting/b129178c-7f08-4225-b2d5-4b4d05482285" class="image fit">
-                                            <img src="images/emp_churn.jpg" alt="" />
-                                        </a>
-                                        <header>
-                                                <a href="https://lookerstudio.google.com/reporting/b129178c-7f08-4225-b2d5-4b4d05482285"><h3>
-                                                <Strong class = "words">Employee Churn Data Analytics
+    .tl-logo, .tl-logo-custom {
+    margin-left: auto;           
+    }*/
+    .tl-logo {
+    flex-shrink: 0;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.75;
+    transition: opacity .25s;
+    }
 
-                                                </Strong></a></h3>
-                                        </header>
-                                        
-                                    </article>
+    .tl-logo img {
+    width: 150%;
+    height: 150%;
+    object-fit: contain;
+    /* filter: brightness(0) invert(1); */
+    transition: filter .25s;
+    }
 
-									<article class="item">
-                                        <a href="https://github.com/simonkdj/simonkdj.github.io/tree/main/ChatGPT%20SQL%20Data%20Analysis" class="image fit"><img src="images/chatgpt.jpg" alt="" />
-                                        </a>
-                                        <header>
-                                            <a href="https://github.com/simonkdj/simonkdj.github.io/tree/main/ChatGPT%20SQL%20Data%20Analysis"><h3>
-                                            <Strong class = "words">ChatGPT Review Data Analysis with SQL and Tableau
-                                            </Strong></a></h3>
-                                        </header>
-                                    </article>
-                                    
-                                </div>
-                                <div class="col-4 col-12-mobile">
-                                    <article class="item">
-                                        <a href="https://github.com/simonkdj/simonkdj.github.io/tree/main/NASA_CMAPSS_Anomaly_Detection_Dashboard" class="image fit"><img src="images/nasa-1.jpg" alt="" />
-                                        </a>
-                                        <header>
-                                            <a href="https://github.com/simonkdj/simonkdj.github.io/tree/main/NASA_CMAPSS_Anomaly_Detection_Dashboard"><h3>
-                                            <Strong class = "words">NASA CMAPSS Anomaly Detection Dashboard
-                                            </Strong></a></h3>
-                                        </header>
-                                    </article>
-                                   
-									</article>
-									<article class="item">
-                                        <a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/VIT_MAE.md" class="image fit"><img src="images/cats.jpg" alt="" /></a>
-                                        <header>
-                                            <a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/VIT_MAE.md"><h3>
-                                                <Strong class ="words">Computer Vision Project
-                                                </Strong></a></h3>
-                                        </header>
-                                    </article>
-                                </div>
-                                <div class="col-4 col-12-mobile">
-                                    <!-- INSERTED HERE -->
-                                    <article class="item">
-                                        <a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/IU%20Revenue%20Prediction.ipynb" class="image fit"><img src="images/IU.jpg" alt="" /></a>
-                                        <header>
-                                            <a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/IU%20Revenue%20Prediction.ipynb"><h3>
-                                                <Strong class = "words">IU H.E.R.E.H Concert Revenue Prediction with Random Forest Regression
-                                            </Strong></a></h3>
-                                    </article>
-                                    
-                                    <article class="item">
-                                        <a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/Retail_Banking_Spark.ipynb" class="image fit"><img src="images/bank.jpg" alt="" /></a>
-                                            <header>
-                                                <a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/Retail_Banking_Spark.ipynb"><h3>
-                                                    <Strong class = "words">Retail Banking Apache Spark Project
-                                                </Strong></a></h3>
-                                            </header>
-                                        </article> 
-                                    <!-- INSERTED HERE -->
-                                    <!-- <article class="item">
-                                        <a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
-                                        <header>
-                                            <h3>...</h3>
-                                        </header>
-                                    </article> -->
-                                </div>
-                            </div>
+    .tl-item:hover .tl-logo {
+    opacity: 1;
+    }
+    .tl-header {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: nowrap;
+      gap: .3rem .7rem;
+      margin-bottom: .55rem;
+      overflow: hidden;
+    }
+    .tl-item:nth-child(1) .tl-logo img, .tl-item:nth-child(5) .tl-logo img {
+    filter: brightness(0) invert(1);
+    opacity: 1;
+    }
 
-
-                            <span id="more" >
-                            
-                                <!-- INSERTED HERE -->
-                            
-                                <div class="row">
-                                    
-                                     
-                                    <div class="col-4 col-12-mobile">
-                                        <!-- INSERTED HERE -->
-                                        <article class="item">
-                                            <a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/Property_Assessment_Program.md" class="image fit"><img src="images/property.jpg" alt="" /></a>
-                                            <header>
-                                                <a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/Property_Assessment_Program.md">
-                                                    <h3><Strong class = "words">Property Assessment Program</Strong></a></h3>
-                                            </header>
-                                        </article>
-
-                                    </div>
-                                    
-                                    <div class="col-4 col-12-mobile">
-                                        
-
-                                        <article class="item">
-                                            <a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/Git-Committed_DNN_Model.md" class="image fit">
-                                                <img src="images/github_logo.jpg" alt="" />
-                                                </a>
-                                            <header>
-                                                    <a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/Git-Committed_DNN_Model.md"><h3>
-                                                    <Strong class = "words">Git-Committed DNN Model for Fault Classification
-                                                    </Strong></a></h3>
-                                            </header>   
-                                            
-                                        </article>
-                                    </div>
-
-                                    <!-- <div class="col-4 col-12-mobile">
-                                        <article class="item">
-                                            <a href="#" class="image fit"><img src="images/bank.jpg"  alt="" /></a>
-                                            <header>
-                                                <a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/Retail_Banking_Spark.ipynb"><h3>
-                                                    <Strong>Retail Banking Apache Spark Project
-                                                </Strong></a></h3>
-                                            </article> 
-                                            
-                                    </div>  -->
-                                </div>
-                        </span>
     
-                        </div>
-                        
-                        <button class = "view-container" onclick="toggleText()" id="myBtn">View more</button>
-                    </section>
-                    
+    .tl-role {
+      font-family: var(--font-m);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.3;
+      white-space: nowrap;
+    }
+    .tl-company {
+      font-family: var(--font-m);
+      font-size: 1.3rem;
+      color: var(--gold2);
+      white-space: nowrap;
+    }
+    .tl-sep { color: var(--border2); font-size: .8rem; flex-shrink: 0; }
 
-                    
+    .tl-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: .75rem;
+      flex-wrap: wrap;
+    }
+    .tl-date {
+      font-family: var(--font-m);
+      font-size: .8rem;
+      letter-spacing: .2em;
+      text-transform: lowercase;
+      color: white;
+    }
+    .tl-badge {
+      font-family: var(--font-m);
+      font-size: .58rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .15rem .55rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      color: var(--violet);
+    }
+    .tl-badge.incoming { color: var(--gold); border-color: rgba(245,200,122,.25); }
 
-                    
-                    
+    .tl-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .42rem;
+    }
+    .tl-bullets li {
+      font-size: .1.5rem;
+ 
+      line-height: 1.75;
+      padding-left: 1rem;
+      position: relative;
+    }
+    /* .tl-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: rgba(248, 223, 179, 0.626);
+      font-size: .75rem;
+      top: .05em;
+    } */
 
-                    <script>
-                    function toggleText() {
-                    var moreText = document.getElementById("more");
-                    var btnText = document.getElementById("myBtn");
+    /* ── Grain shader canvas — sits behind 2D sections ── */
+    #grain-canvas {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1; pointer-events: none;
+      opacity: 0; transition: opacity 1.2s ease;
+    }
+    #grain-canvas.visible { opacity: 1; }
 
-                    if (moreText.style.display === "none" || moreText.style.display === "") {
-                        moreText.style.display = "inline";
-                        btnText.innerHTML = "Collapse"; 
-                    } else {
-                        moreText.style.display = "none";
-                        btnText.innerHTML = "View more"; 
-                    }
-                    }
-                    </script>
-                                        
-                    
+    /* 2D sections float above grain canvas */
+    #experience, #projects, #tech-stack, #about, footer {
+      position: relative; z-index: 2;
+      background: transparent;
+    }
 
-                    <!-- Tech Stack -->
-                    <section id="tech-stack" class="four">
-                        <div class="tech-container">
-                            <header>
-                                <h2 class="section-title">Tech Stack</h2>
-                            </header>
-                            <div class="tech-stack-grid">
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/mysql-logo-pure.svg" alt="mysql" class="tech-icon">
-                                    <p>mySQL</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/python-5.svg" alt="python" class="tech-icon">
-                                    <p>Python</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/pytorch-icon.svg" alt="pytorch" class="tech-icon">
-                                    <p>Pytorch</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/java-icon.svg" alt="java" class="tech-icon">
-                                    <p>Java</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/pandas.svg" alt="pandas" class="tech-icon">
-                                    <p>Pandas</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/matplotlib-1.svg" alt="matplotlib" class="tech-icon">
-                                    <p>Matplotlib</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/scikit-learn.svg" alt="scikit-learn" class="tech-icon">
-                                    <p>Scikit-Learn</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/numpy-1.svg" alt="numpy" class="tech-icon">
-                                    <p>NumPy</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/seaborn-1.svg" alt="seaborn" class="tech-icon">
-                                    <p>Seaborn</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/tableau-software.svg" alt="tableau" class="tech-icon">
-                                    <p>Tableau</p>
-                                </div>
-                                
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/Apache Spark.svg" alt="apachespark" class="tech-icon">
-                                    <p>Apache Spark</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/Databricks_idF4fnHpaJ_0.svg" alt="databricks" class="tech-icon">
-                                    <p>Databricks</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/colab-color.svg" alt="colab" class="tech-icon">
-                                    <p>Colab</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/Snowflake_idCkdSg0B6_0.svg" alt="snowflake" class="tech-icon">
-                                    <p>Snowflake</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/jupyter-svgrepo-com-2.svg" alt="jupyter" class="tech-icon">
-                                    <p>Jupyter</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/aws-s3-svgrepo-com.svg" alt="amazons3" class="tech-icon">
-                                    <p>Amazon S3</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/mongodb-icon-1.svg" alt="mongodb" class="tech-icon">
-                                    <p>MongoDB</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/icons8-docker.svg" alt="docker" class="tech-icon">
-                                    <p>Docker</p>
-                                </div>
-                                
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/icons8-excel.svg" alt="excel" class="tech-icon">
-                                    <p>Excel</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/figma.svg" alt="figma" class="tech-icon">
-                                    <p>Figma</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/bigquery.svg" alt="figma" class="tech-icon">
-                                    <p>BigQuery</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/GCP.svg" alt="figma" class="tech-icon">
-                                    <p>GCP</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/looker.svg" alt="figma" class="tech-icon">
-                                    <p>Looker</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/unsloth-2.svg" alt="figma" class="tech-icon">
-                                    <p>Unsloth</p>
-                                </div>
-                                <div class="icon-wrapper">
-                                    <img src="assets/SVGs/pycaret.svg" alt="figma" class="tech-icon">
-                                    <p>Pycaret</p>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </section>
-                    
-                    
+    /* ── Experience Timeline ── */
+    #experience { background: black; }
 
-                <!-- About Me -->
-                    <section id="about" class="three">
-                        <div class="container">
-                            <div class="line"></div>
-                            <div class="line"></div>
-                            <div class="line"></div>
-                            <header>
-                                <h2 class="about">About Me</h2>
-                            </header>
+    /* Half-page breathing space between sections */
+    /* .section-gap {
+      height: 50vh; position: relative; z-index: 2;
+    } */
 
-                            <a href="#" class="image fit"><img src="" alt="" /></a>                     
-                            <!-- <a href="#" class="image fit"><img src="images/AboutmePic.jpg" alt="" /></a> -->
-                            <p><hmy class="words">I am a creator. Whether for career or for fun, I always look for opportunities to realize my ideas. 
-                                I have been exploring randomly generated music with Deep Neural Networks and aim to develop a model that I can approve as a musician. In the meanwhile, feel free to check out some of my favorite song arrangements below!</hmy></p>
-                            <p class="music_insa_text">
-                                simo_nmusic
-                            <a href="https://www.instagram.com/simo_nmusic/" class="icon brands fa-instagram">
-                                <span class="label"></span>
-                              </a>
-                            </p>
+    /* About */
+    #about { background: var(--bg); }
 
-                            
-                        </div>
-                    </section>
+    /* Projects */
+    #projects { background: var(--bg); }
 
-                <!-- Portfolio -->
-                    
-                
+    /* Footer */
+    footer { background: var(--bg); border-top: 1px solid var(--border); }
 
+        /* Reveal */
+    .reveal { opacity:0; transform:translateY(20px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+    .reveal.in { opacity:1; transform:none; }
+    @keyframes up { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
+
+    @media (max-width:768px) {
+      .nav-links, .nav-right { display: none; }
+      .about-grid { grid-template-columns:1fr; }
+      .about-visual { display:none; }
+      .tl-header { flex-direction: column; gap: .15rem; }
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .tech-grid { grid-template-columns: repeat(5, 1fr); }
+    }
+    @media (max-width:480px) {
+      .projects-grid { grid-template-columns: 1fr; }
+      .tech-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo"></a>
+  <ul class="nav-links">
+    <li><a href="#hero">To ∞</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#tech-stack">Stack</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="https://github.com/simonkdj">Github</a></li>
+    <li><a href="https://www.linkedin.com/in/linkgunhui/">LinkedIn</a></li>
+<!-- 
+    <a href="https://github.com/simonkdj" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/linkgunhui/" target="_blank" rel="noopener">LinkedIn</a> -->
+
+
+  </ul>
+  <!-- <div class="nav-right">
+    <a href="https://github.com/simonkdj" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/linkgunhui/" target="_blank" rel="noopener">LinkedIn</a>
+  </div> -->
+</nav>
+
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div id="hero-ui">
+    <div class="hero-content">
+      <div class="hero-label"><span class="hero-label-dot"></span>Open to Full-Time opportunities</div>
+      <h1 class="hero-name">Gunhui Kim</h1>
+      <p class="hero-role">Data Scientist &amp; ML Engineer</p>
+      <p class="hero-bio">Solving data problems with machine learning<br>Berkeley, CA</p></br>
+      <div class="hero-cta">
+        <!-- <a href="#projects" class="btn-warm">View Projects</a> -->
+        <a href="#experience" class="btn-outline">Scroll Through Space ↓</a>
+      </div>
+    </div>
+    <div id="hero-glow"></div>
+    <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
+  </div>
+  <div id="space-fade"></div>
+</section>
+
+<!-- <canvas id="grain-canvas"></canvas> -->
+
+<section id="experience">
+  <!-- <p class="sec-label reveal">Career</p> -->
+  <h2 class="sec-title reveal">Work Experience</h2>
+  <p class="sec-sub reveal">Internships across data science, analytics, and machine learning, from pharmaceutical and consumer goods to entertainment.</p>
+
+  <div class="timeline">
+
+    <!-- 1 — Pixar -->
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-top">
+        <div class="tl-body">
+          <div class="tl-header">
+            <span class="tl-role">Incoming Systems Intern</span>
+            <span class="tl-sep">·</span>
+            <span class="tl-company">Pixar Animation Studios</span>
+          </div>
+          <div class="tl-meta">
+            <span class="tl-date">Summer 2026</span>
+            <span class="tl-badge incoming">Internship</span>
+          </div>
+          <ul class="tl-bullets">
+            <li>ML, Automation, and Magic :)</li>
+      
+        </div>
+        <div class="tl-logo">
+          <!-- Replace src with your Pixar SVG path, e.g. assets/SVGs/pixar.svg -->
+          <img src="assets/SVGs/Pixar.svg" alt="Pixar"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 — Clorox -->
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-top">
+        <div class="tl-body">
+          <div class="tl-header">
+            <span class="tl-role">Financial Data Engineer Co-op</span>
+            <span class="tl-sep">·</span>
+            <span class="tl-company">The Clorox Company</span>
+          </div>
+          <div class="tl-meta">
+            <span class="tl-date">February 2026 – Present</span>
+            <span class="tl-badge">Internship</span>
+          </div>
+          <!-- <ul class="tl-bullets">
+            <li>Az</li>
+          </ul> -->
+        </div>
+        <div class="tl-logo">
+          <!-- Replace src with your Clorox SVG path, e.g. assets/SVGs/clorox.svg -->
+          <img src="assets/SVGs/Clorox.svg" alt="Clorox"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 — Boehringer Ingelheim -->
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-top">
+        <div class="tl-body">
+          <div class="tl-header">
+            <span class="tl-role">Data Science/Analytics Intern — Process Analysis &amp; KPI</span>
+            <span class="tl-sep">·</span>
+            <span class="tl-company">Boehringer Ingelheim</span>
+          </div>
+          <div class="tl-meta">
+            <span class="tl-date">June 2025 – December 2025</span>
+            <span class="tl-badge">Internship</span>
+          </div>
+          <!-- <ul class="tl-bullets">
+            <li>Developed predictive models using PyTorch and Scikit-Learn for clinical data analysis tasks.</li>
+            <li>Applied anomaly detection techniques to pharmaceutical manufacturing sensor data, improving detection accuracy by 15%.</li>
+            <li>Presented findings and model results to senior data scientists and cross-functional stakeholders.</li>
+          </ul> -->
+        </div>
+        <div class="tl-logo">
+          <!-- Replace src with your Boehringer SVG path, e.g. assets/SVGs/boehringer.svg -->
+          <img src="assets/SVGs/BI.svg" alt="Boehringer Ingelheim"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 — LG Nova -->
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-top">
+        <div class="tl-body">
+          <div class="tl-header">
+            <span class="tl-role">Software Engineer</span>
+            <span class="tl-sep">·</span>
+            <span class="tl-company">LG Nova</span>
+          </div>
+          <div class="tl-meta">
+            <span class="tl-date">September 2025 – December 2025</span>
+            <span class="tl-badge">Contract</span>
+          </div>
+          <!-- <ul class="tl-bullets">
+            <li>Conducted research on deep neural network fault classification using Git-integrated model versioning.</li>
+            <li>Explored Vision Transformer (ViT) architectures with Masked Autoencoders (MAE) for computer vision tasks.</li>
+            <li>Contributed to lab pipelines for data preprocessing and model evaluation on large-scale datasets.</li>
+          </ul> -->
+        </div>
+        <div class="tl-logo">
+          <!-- Replace src with your LG Nova SVG path, e.g. assets/SVGs/lgnova.svg -->
+          <img src="assets/SVGs/LG.svg" alt="LG Nova"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 — Relativity Space -->
+    <div class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-top">
+        <div class="tl-body">
+          <div class="tl-header">
+            <span class="tl-role">Data and Software Engineer</span>
+            <span class="tl-sep">·</span>
+            <span class="tl-company">Relativity Space</span>
+          </div>
+          <div class="tl-meta">
+            <span class="tl-date">March 2025 – May 2025</span>
+            <span class="tl-badge">Contract</span>
+          </div>
+          <!-- <ul class="tl-bullets">
+            <li>Built end-to-end ML projects spanning NLP, time-series forecasting, Spark data pipelines, and revenue prediction models.</li>
+            <li>Processed 100k+ data records via SQL and Tableau for sentiment and trend analysis.</li>
+            <li>Developed data engineering pipelines supporting production-level systems.</li>
+          </ul> -->
+        </div>
+        <div class="tl-logo">
+          <!-- Replace src with your Relativity Space SVG path, e.g. assets/SVGs/relativity.svg -->
+          <img src="assets/SVGs/RelSpace.svg" alt="Relativity Space"/>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- <div class="section-gap"></div> -->
+
+<section id="projects">
+  <!-- <p class="sec-label reveal">Selected Work</p> -->
+  <h2 class="sec-title reveal">My Projects</h2>
+  <p class="sec-sub reveal">
+    Data <span id="changing-word">science</span> and Machine Learning.
+  </p>
+
+<style>
+  #changing-word {
+    display: inline-block;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  
+  .fade-out {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  
+  .fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+    const words = ["Science", "Analytics", "Engineering"];
+    let index = 0;
+    const el = document.getElementById("changing-word");
+  
+    setInterval(() => {
+      // fade out
+      el.classList.add("fade-out");
+  
+      setTimeout(() => {
+        // change word
+        index = (index + 1) % words.length;
+        el.textContent = words[index];
+  
+        // fade back in
+        el.classList.remove("fade-out");
+        el.classList.add("fade-in");
+  
+        // cleanup
+        setTimeout(() => {
+          el.classList.remove("fade-in");
+        }, 400);
+  
+      }, 400); // match CSS duration
+  
+    }, 2000); // change every 2s
+  </script>
+
+
+
+
+
+
+  <div class="projects-grid">
+    <!-- Row 1 — always visible: NASA, IU, Apache, Looker -->
+    <a href="https://github.com/simonkdj/simonkdj.github.io/tree/main/NASA_CMAPSS_Anomaly_Detection_Dashboard" target="_blank" class="project-card reveal">
+      <span class="project-num">01</span>
+      <img src="images/nasa-1.jpg" alt="NASA CMAPSS" class="project-img"/>
+      <p class="project-title">NASA CMAPSS Anomaly Detection Dashboard</p>
+      <div class="project-pills"><span class="pill">Isolation Forest</span><span class="pill">Anomaly Detection</span><span class="pill">Scikit-Learn</span></div>
+      <span class="project-arrow">↗</span>
+    </a>
+    <a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/IU%20Revenue%20Prediction.ipynb" target="_blank" class="project-card reveal">
+      <span class="project-num">02</span>
+      <img src="images/IU.jpg" alt="IU Revenue Prediction" class="project-img"/>
+      <p class="project-title">IU Concert Revenue Prediction — Random Forest</p>
+      <div class="project-pills"><span class="pill">Random Forest Regression</span><span class="pill">Scikit-Learn</span></div>
+      <span class="project-arrow">↗</span>
+    </a>
+    <a href="https://github.com/simonkdj/simonkdj.github.io/blob/main/Retail_Banking_Spark.ipynb" target="_blank" class="project-card reveal">
+      <span class="project-num">03</span>
+      <img src="images/bank.jpg" alt="Retail Banking Spark" class="project-img"/>
+      <p class="project-title">Retail Banking Apache Spark Project</p>
+      <div class="project-pills"><span class="pill">K-Means Clustering</span><span class="pill">Apache Spark</span><span class="pill">Databricks</span></div>
+      <span class="project-arrow">↗</span>
+    </a>
+    <a href="https://lookerstudio.google.com/reporting/b129178c-7f08-4225-b2d5-4b4d05482285" target="_blank" class="project-card reveal">
+      <span class="project-num">04</span>
+      <img src="images/emp_churn.jpg" alt="Employee Churn" class="project-img"/>
+      <p class="project-title">Employee Churn Data Analytics</p>
+      <div class="project-pills"><span class="pill">Looker Studio</span><span class="pill">BigQuery</span><span class="pill">Pycaret</span><span class="pill">AutoML</span></div>
+      <span class="project-arrow">↗</span>
+    </a>
+    <!-- Row 2 — revealed on expand -->
+    <a id="ep1" href="https://github.com/simonkdj/simonkdj.github.io/tree/main/ChatGPT%20SQL%20Data%20Analysis" target="_blank" class="project-card" style="display:none">
+      <span class="project-num">05</span>
+      <img src="images/chatgpt.jpg" alt="ChatGPT SQL" class="project-img"/>
+      <p class="project-title">ChatGPT Review Analysis with SQL &amp; Tableau</p>
+      <div class="project-pills"><span class="pill">Tableau</span><span class="pill">SQL</span></div>
+      <span class="project-arrow">↗</span>
+    </a>
+    <a id="ep2" href="https://github.com/simonkdj/simonkdj.github.io/blob/main/VIT_MAE.md" target="_blank" class="project-card" style="display:none">
+      <span class="project-num">06</span>
+      <img src="images/cats.jpg" alt="Computer Vision" class="project-img"/>
+      <p class="project-title">Computer Vision — ViT MAE Project</p>
+      <div class="project-pills"><span class="pill">Vision Transformer Masked Autoencoder</span><span class="pill">PyTorch</span> </div>
+      <span class="project-arrow">↗</span>
+    </a>
+    <!-- <a id="ep3" href="https://github.com/simonkdj/simonkdj.github.io/blob/main/Property_Assessment_Program.md" target="_blank" class="project-card" style="display:none">
+      <span class="project-num">07</span>
+      <img src="images/property.jpg" alt="Property Assessment" class="project-img"/>
+      <p class="project-title">Property Assessment Program</p>
+      <div class="project-pills"><span class="pill">Python</span></div>
+      <span class="project-arrow">↗</span>
+    </a> -->
+    <a id="ep4" href="https://github.com/simonkdj/simonkdj.github.io/blob/main/Git-Committed_DNN_Model.md" target="_blank" class="project-card" style="display:none">
+      <span class="project-num">08</span>
+      <img src="images/github_logo.jpg" alt="DNN Fault Classification" class="project-img"/>
+      <p class="project-title">Git-Committed DNN Model for Fault Classification</p>
+      <div class="project-pills"><span class="pill">Classification</span><span class="pill">Pytorch</span></div>
+      <span class="project-arrow">↗</span>
+    </a>
+  </div>
+
+  <div class="more-wrap">
+    <button id="view-more-btn">+ View more</button>
+  </div>
+</section>
+<!-- <div class="section-gap"></div> -->
+
+<section id="tech-stack">
+  <!-- <p class="sec-label reveal">Tools &amp; Technologies</p> -->
+  <h2 class="sec-title reveal">Tech Stack</h2>
+  <div class="tech-grid" id="tech-grid"></div>
+</section>
+<!-- <div class="section-gap"></div> -->
+
+<section id="about">
+  <!-- <p class="sec-label reveal">Background</p> -->
+  <h2 class="sec-title reveal">About Me</h2>
+  <div class="about-grid">
+    <!-- <div class="about-text reveal"> -->
+      <p>I always have been a person who enjoys coming up with creative ways to turn my ideas and data into something real and magical.
+        Across companies and projects of varying sizes and scopes, I have learned a lot about problem solving and about myself too.
+        I want to continue exploring further into this space, and I hope we can create something meaningful along the way too~
+        In the meanwhile, feel free to check out some of my favorite song arrangements below!</p>
+      <!-- <div class="about-music-block"> -->
+        <!-- <div class="music-icon">
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 12V4.5l7-1.5V11" stroke="#f5c87a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="4.5" cy="12" r="1.5" stroke="#f5c87a" stroke-width="1.2"/>
+            <circle cx="11.5" cy="11" r="1.5" stroke="#f5c87a" stroke-width="1.2"/>
+          </svg>
+        </div> -->
+        <div class="music-info">
+          <!-- <p>Music project</p> -->
+          <a href="https://www.instagram.com/simo_nmusic/" target="_blank" rel="noopener">@simo_nmusic ↗</a>
+        </div>
+      <!-- </div> -->
+      <!-- <div class="about-visual reveal"> -->
+        <div class="about-photo-grid">
+
+            <div class="about-photo-wrapper">
+              <img src="images/AboutMe1.PNG" alt="About me photo 1" class="about-photo">
             </div>
-
-        <!-- Footer -->
-            <div id="footer">
-
-                
-
+          
+            <div class="about-photo-wrapper">
+              <img src="images/AboutMe2.jpg" alt="About me photo 2" class="about-photo">
             </div>
+          
+            <div class="about-photo-wrapper">
+              <img src="images/AboutMe3.jpg" alt="About me photo 3" class="about-photo">
+            </div>
+          
+          </div>
+    <style>
+    
+     
+      /*.about-photo-wrapper {
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+        border-radius: 80%; makes it circular  
+        overflow: hidden;
+        position: relative;
+      }
+      
+      .about-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+       optional: subtle glow effect to replace orb vibe 
+      .about-photo-wrapper::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
+        pointer-events: none;
+      }*/
 
-        <!-- Scripts -->
-            <script src="assets/js/jquery.min.js"></script>
-            <script src="assets/js/jquery.scrolly.min.js"></script>
-            <script src="assets/js/jquery.scrollex.min.js"></script>
-            <script src="assets/js/browser.min.js"></script>
-            <script src="assets/js/breakpoints.min.js"></script>
-            <script src="assets/js/util.js"></script>
-            <script src="assets/js/main.js"></script>
-            <script src="assets/js/mouseani.js"></script>
-            <script src="assets/js/smiley.js"></script>
+      .about-photo-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5rem;
+  width: 100%;
+}
 
-			<script>
-				$(function(){
-				$('.button-volume').click(function () {
-					$('.button-volume').toggleClass("mute");
-				});
-				});
-			</script>
+/* your existing card style */
+.about-photo-wrapper {
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transform: rotate(-1deg);
+}
 
-    </body>
+.about-photo-wrapper:hover {
+  transform: scale(1.5);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+}
+
+.about-photo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.about-photo-grid .about-photo-wrapper:nth-child(1) {
+  transform: rotate(-3deg);
+}
+.about-photo-grid .about-photo-wrapper:hover:nth-child(1) {
+  transform: rotate(0deg);
+  transform: scale(1.5);
+}
+
+.about-photo-grid .about-photo-wrapper:nth-child(2) {
+  transform: rotate(2deg);
+}
+.about-photo-grid .about-photo-wrapper:hover:nth-child(2) {
+  transform: rotate(0deg);
+  transform: scale(1.5);
+}
+
+.about-photo-grid .about-photo-wrapper:nth-child(3) {
+  transform: rotate(-1deg);
+}
+.about-photo-grid .about-photo-wrapper:hover:nth-child(3) {
+  transform: rotate(0deg);
+  transform: scale(1.5);
+}
+
+/* 📱 mobile fallback */
+@media (max-width: 700px) {
+  .about-photo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+  </style>
+</section>
+
+<footer>
+  <!-- <p class="footer-copy">© 2025 Gunhui Kim</p> -->
+  <!-- <div class="footer-links">
+    <a href="https://github.com/simonkdj" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/linkgunhui/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/simo_nmusic/" target="_blank" rel="noopener">Instagram</a> -->
+  <!-- </div>  -->
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ── Three.js: floating warm firefly/lantern scene ── */
+(function(){
+  const canvas = document.getElementById('hero-canvas');
+  const R = new THREE.WebGLRenderer({ canvas, antialias:false, alpha:true, powerPreference:'high-performance' });
+  R.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+  R.setClearColor(0,0);
+
+  const scene = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(60, 1, 0.1, 80);
+  cam.position.set(0, 0, 10);
+
+  /* ── Galaxy background ──────────────────────────────────────────────────
+     Camera is at z=10. Stars need to be z=-6 to z=-14 with sizes 0.08+
+     to render as visible pixels. Previous version used z=-20 → sub-pixel. ── */
+
+  /* Circular soft dot texture — drawn once, reused on all point layers */
+  const dotCanvas = document.createElement('canvas');
+  dotCanvas.width = dotCanvas.height = 64;
+  const dotCtx = dotCanvas.getContext('2d');
+  const grad = dotCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  grad.addColorStop(0,   'rgba(255,255,255,1)');
+  grad.addColorStop(0.4, 'rgba(255,255,255,0.6)');
+  grad.addColorStop(1,   'rgba(255,255,255,0)');
+  dotCtx.fillStyle = grad;
+  dotCtx.fillRect(0, 0, 64, 64);
+  const dotTex = new THREE.CanvasTexture(dotCanvas);
+
+  function makeStars(count, zMin, zMax, size, color, opacity, spreadX, spreadY) {
+    const p = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      p[i*3]   = (Math.random() - 0.5) * spreadX;
+      p[i*3+1] = (Math.random() - 0.5) * spreadY;
+      p[i*3+2] = zMin + Math.random() * (zMax - zMin);
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(p, 3));
+    scene.add(new THREE.Points(g, new THREE.PointsMaterial({
+      size, color, map: dotTex, transparent: true, opacity,
+      depthWrite: false, sizeAttenuation: true, alphaTest: 0.01
+    })));
+  }
+
+  /* Deep field — many small white stars */
+  makeStars(2200, -14, -8,  0.10, 0xffffff, 0.7, 50, 40);
+  /* Mid layer — warm cream */
+  makeStars(700,  -10, -6,  0.14, 0xfff4e0, 0.6, 44, 36);
+  /* Blue-white hot stars */
+  makeStars(60,   -9,  -6,  0.18, 0xaaccff, 0.8, 40, 32);
+
+  /* Milky Way band — tilted ~30°, gaussian cross-section */
+  (function() {
+    const MW = 2800, p = new Float32Array(MW * 3), angle = 0.52;
+    for (let i = 0; i < MW; i++) {
+      const along  = (Math.random() - 0.5) * 60;
+      const across = (Math.random() - 0.5) * 5 * Math.exp(-Math.abs(along) / 22);
+      const z      = -14 + Math.random() * 4;
+      p[i*3]   = along * Math.cos(angle) - across * Math.sin(angle);
+      p[i*3+1] = along * Math.sin(angle) + across * Math.cos(angle);
+      p[i*3+2] = z;
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(p, 3));
+    scene.add(new THREE.Points(g, new THREE.PointsMaterial({
+      size: 0.08, color: 0xcce0ff, map: dotTex, transparent: true, opacity: 0.35,
+      depthWrite: false, sizeAttenuation: true, alphaTest: 0.01
+    })));
+  })();
+
+  /* Nebula color clouds — large soft blobs */
+  makeStars(120, -13, -10, 0.9,  0x5533bb, 0.12, 40, 28);
+  makeStars(100, -12, -9,  1.1,  0x1133aa, 0.10, 36, 26);
+  makeStars(80,  -12, -9,  0.9,  0xcc2255, 0.09, 32, 24);
+  makeStars(90,  -13, -9,  1.0,  0x004455, 0.12, 38, 28);
+
+  /* ── Solar system — center-right, orbital plane tilted for depth ── */
+  const solarSystem = new THREE.Group();
+  solarSystem.position.set(1.5, -0.8, -9);
+  solarSystem.rotation.x = 0.30;   // tilt so orbital plane has depth
+  solarSystem.rotation.y = -0.22;
+  scene.add(solarSystem);
+
+  /* ── Realistic Sun ────────────────────────────────────────────────────
+     - ShaderMaterial with limb darkening (edges darker/redder than center)
+     - Animated plasma/granulation surface via 2D value noise
+     - 6 additive corona layers fading outward
+  ── */
+  const sunUniforms = { time: { value: 0.0 } };
+
+  const sun = new THREE.Mesh(
+    new THREE.SphereGeometry(0.62, 48, 48),
+    new THREE.ShaderMaterial({
+      uniforms: sunUniforms,
+      vertexShader: `
+        varying vec3 vNormal;
+        varying vec2 vUv;
+        void main() {
+          vNormal = normalize(normalMatrix * normal);
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform float time;
+        varying vec3 vNormal;
+        varying vec2 vUv;
+
+        float hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
+        float noise(vec2 p){
+          vec2 i=floor(p); vec2 f=fract(p);
+          f=f*f*(3.0-2.0*f);
+          return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),
+                     mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);
+        }
+        float fbm(vec2 p){
+          return noise(p)*0.55 + noise(p*2.1+vec2(1.7,9.2))*0.28 + noise(p*4.5+vec2(8.3,2.8))*0.17;
+        }
+
+        void main(){
+          /* Limb darkening: normal.z is cos(angle to viewer) in view space */
+          float limb = pow(max(vNormal.z, 0.0), 0.42);
+
+          /* Animated plasma surface */
+          vec2 nc = vUv * 6.5;
+          float plasma = fbm(nc + vec2(time*0.055, time*0.038))
+                       + fbm(nc*1.8 - vec2(time*0.08, time*0.06)) * 0.4;
+          plasma = clamp(plasma * 0.7, 0.0, 1.0);
+
+          /* Color: white-yellow core → orange mid → deep red-orange edge */
+          vec3 cCore  = vec3(1.00, 0.98, 0.80);
+          vec3 cMid   = vec3(1.00, 0.58, 0.10);
+          vec3 cEdge  = vec3(0.82, 0.16, 0.02);
+          vec3 col    = mix(cEdge, mix(cMid, cCore, limb), limb);
+
+          /* Plasma brightens hotter patches near center */
+          col += vec3(0.20, 0.07, 0.0) * plasma * (0.25 + 0.75*limb);
+
+          /* Overall brightness: very bright at disc center */
+          float bright = 0.70 + 0.55*limb + 0.08*plasma;
+          gl_FragColor = vec4(col * bright, 1.0);
+        }
+      `
+    })
+  );
+  solarSystem.add(sun);
+
+  /* Corona — 6 additive layers, each larger and more transparent */
+  [
+    { r: 0.70, col: 0xffcc33, op: 0.28 },   // photosphere fringe
+    { r: 0.85, col: 0xff8800, op: 0.16 },   // chromosphere
+    { r: 1.10, col: 0xff5500, op: 0.09 },   // inner corona
+    { r: 1.60, col: 0xff3300, op: 0.05 },   // middle corona
+    { r: 2.40, col: 0xff4400, op: 0.025 },  // outer corona
+    { r: 3.80, col: 0xff6600, op: 0.010 },  // extended glow
+  ].forEach(({ r, col, op }) => {
+    solarSystem.add(new THREE.Mesh(
+      new THREE.SphereGeometry(r, 16, 16),
+      new THREE.MeshBasicMaterial({
+        color: col, transparent: true, opacity: op,
+        depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.FrontSide
+      })
+    ));
+  });
+
+  /* ── Canvas texture factory ── */
+  function makeTex(sz, fn) {
+    const c = document.createElement('canvas'); c.width = c.height = sz;
+    fn(c.getContext('2d'), sz); return new THREE.CanvasTexture(c);
+  }
+
+  /* ── Per-planet texture painters — NASA/Voyager color-accurate ── */
+  const textures = {
+
+    /* Mercury: Moon-like neutral grey, no warm tones, heavy cratering */
+    mercury: makeTex(256, (ctx, s) => {
+      ctx.fillStyle='#898989'; ctx.fillRect(0,0,s,s);
+      /* Subtle large-scale albedo variation */
+      const g = ctx.createRadialGradient(s*.38,s*.36,s*.05, s*.5,s*.5,s*.55);
+      g.addColorStop(0,'rgba(160,158,155,0.55)');
+      g.addColorStop(.5,'rgba(120,118,115,0.30)');
+      g.addColorStop(1,'rgba(70,68,66,0.50)');
+      ctx.fillStyle=g; ctx.fillRect(0,0,s,s);
+      /* Craters — dark pit + bright ejecta rim */
+      for(let i=0;i<60;i++){
+        const x=Math.random()*s, y=Math.random()*s, r=1+Math.random()*9;
+        /* Shadow floor */
+        ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(50,48,46,${0.35+Math.random()*.45})`; ctx.fill();
+        /* Bright ejecta rim */
+        ctx.beginPath(); ctx.arc(x,y,r*1.25,0,Math.PI*2);
+        ctx.strokeStyle=`rgba(190,188,185,${0.25+Math.random()*.3})`; ctx.lineWidth=r*.4; ctx.stroke();
+        /* Bright central peak on large craters */
+        if(r>5){ ctx.beginPath(); ctx.arc(x,y,r*.22,0,Math.PI*2);
+          ctx.fillStyle='rgba(195,193,190,0.7)'; ctx.fill(); }
+      }
+    }),
+
+    /* Venus: Thick unbroken sulphuric acid clouds — very bright cream-white,
+       almost featureless. Voyager/Mariner show only faint Y-shaped UV streaks. */
+    venus: makeTex(256, (ctx, s) => {
+      /* Base: bright warm white */
+      ctx.fillStyle='#f2edd8'; ctx.fillRect(0,0,s,s);
+      /* Limb darkening — slightly darker near edges */
+      const ld = ctx.createRadialGradient(s*.5,s*.5,s*.1, s*.5,s*.5,s*.65);
+      ld.addColorStop(0,'rgba(255,253,240,0.0)');
+      ld.addColorStop(.7,'rgba(210,195,150,0.15)');
+      ld.addColorStop(1,'rgba(160,140,90,0.45)');
+      ctx.fillStyle=ld; ctx.fillRect(0,0,s,s);
+      /* Very faint horizontal cloud streaks */
+      for(let i=0;i<14;i++){
+        const y0=s*(i/14+.03), wave=6+Math.random()*10;
+        ctx.beginPath();
+        ctx.strokeStyle=`rgba(230,218,175,${0.06+Math.random()*.10})`;
+        ctx.lineWidth=3+Math.random()*9;
+        ctx.moveTo(0,y0);
+        ctx.bezierCurveTo(s*.25,y0-wave,s*.65,y0+wave,s,y0+wave*.3);
+        ctx.stroke();
+      }
+      /* Faint polar brightening */
+      ctx.fillStyle='rgba(252,248,238,0.28)';
+      ctx.beginPath(); ctx.ellipse(s*.5,s*.05,s*.3,s*.07,0,0,Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(s*.5,s*.95,s*.28,s*.06,0,0,Math.PI*2); ctx.fill();
+    }),
+
+    /* Earth: Deep ocean blue, realistic green-brown continents, polar ice, cloud cover */
+    earth: makeTex(256, (ctx, s) => {
+      /* Deep Atlantic/Pacific blue */
+      ctx.fillStyle='#1a6ab0'; ctx.fillRect(0,0,s,s);
+      /* Continent shapes — mixed green (forests) + tan (desert) */
+      const lands = [
+        /* Americas */    {cx:.18,cy:.30,rx:.11,ry:.20,rot:.15,c:'#3a7a35'},
+        {cx:.16,cy:.58,rx:.08,ry:.14,rot:-.1,c:'#5a8a30'},
+        /* Europe/Africa */{cx:.52,cy:.25,rx:.07,ry:.13,rot:.05,c:'#5a8838'},
+        {cx:.54,cy:.52,rx:.10,ry:.18,rot:.08,c:'#8a7830'},
+        /* Asia */         {cx:.70,cy:.24,rx:.17,ry:.14,rot:-.08,c:'#5a7830'},
+        {cx:.75,cy:.38,rx:.09,ry:.08,rot:.12,c:'#8a8030'},
+        /* Australia */    {cx:.73,cy:.64,rx:.07,ry:.06,rot:.1, c:'#a08030'},
+      ];
+      lands.forEach(({cx,cy,rx,ry,rot,c})=>{
+        ctx.save(); ctx.translate(cx*s,cy*s); ctx.rotate(rot);
+        ctx.beginPath(); ctx.ellipse(0,0,rx*s,ry*s,0,0,Math.PI*2);
+        ctx.fillStyle=c; ctx.fill(); ctx.restore();
+      });
+      /* Sahara / Arabian desert tones */
+      [[.52,.40,.06,.05,.1,'#c8a850'],[.64,.34,.05,.04,.0,'#c0a040']].forEach(([cx,cy,rx,ry,rot,c])=>{
+        ctx.save(); ctx.translate(cx*s,cy*s); ctx.rotate(rot);
+        ctx.beginPath(); ctx.ellipse(0,0,rx*s,ry*s,0,0,Math.PI*2);
+        ctx.fillStyle=c; ctx.fill(); ctx.restore();
+      });
+      /* Antarctic ice sheet */
+      ctx.fillStyle='rgba(235,245,255,0.92)';
+      ctx.beginPath(); ctx.ellipse(s*.5,s*.97,s*.38,s*.06,0,0,Math.PI*2); ctx.fill();
+      /* Arctic ice */
+      ctx.fillStyle='rgba(225,238,255,0.80)';
+      ctx.beginPath(); ctx.ellipse(s*.5,s*.03,s*.32,s*.055,0,0,Math.PI*2); ctx.fill();
+      /* Cloud layer */
+      for(let i=0;i<22;i++){
+        ctx.beginPath();
+        ctx.fillStyle=`rgba(255,255,255,${.18+Math.random()*.28})`;
+        ctx.ellipse(Math.random()*s,Math.random()*s,22+Math.random()*38,5+Math.random()*14,
+          Math.random()*Math.PI,0,Math.PI*2); ctx.fill();
+      }
+    }),
+
+    /* Mars: Rusty iron-oxide orange — NOT red. Pale ochre with dark basalt seas. */
+    mars: makeTex(256, (ctx, s) => {
+      /* Base: warm rust/ochre — the "butterscotch" color of Viking/Perseverance images */
+      ctx.fillStyle='#c1622a'; ctx.fillRect(0,0,s,s);
+      /* Large albedo variation — Tharsis highlands lighter, Hellas basin darker */
+      const g = ctx.createRadialGradient(s*.35,s*.4,0, s*.5,s*.5,s*.6);
+      g.addColorStop(0,'rgba(210,140,80,0.40)');
+      g.addColorStop(.5,'rgba(180,100,50,0.20)');
+      g.addColorStop(1,'rgba(100,50,20,0.35)');
+      ctx.fillStyle=g; ctx.fillRect(0,0,s,s);
+      /* Dark basalt regions — Syrtis Major, Mare Acidalium */
+      [[.55,.38,.18,.08,.3,'rgba(70,35,15,0.55)'],[.28,.45,.14,.06,.8,'rgba(80,38,18,0.45)'],
+       [.65,.58,.12,.05,.2,'rgba(75,36,16,0.40)']].forEach(([cx,cy,rx,ry,rot,c])=>{
+        ctx.save(); ctx.translate(cx*s,cy*s); ctx.rotate(rot);
+        ctx.beginPath(); ctx.ellipse(0,0,rx*s,ry*s,0,0,Math.PI*2);
+        ctx.fillStyle=c; ctx.fill(); ctx.restore();
+      });
+      /* North polar water-ice cap */
+      ctx.fillStyle='rgba(235,230,220,0.85)';
+      ctx.beginPath(); ctx.ellipse(s*.5,s*.04,s*.22,s*.055,0,0,Math.PI*2); ctx.fill();
+      /* South polar CO₂/water ice */
+      ctx.fillStyle='rgba(245,240,232,0.75)';
+      ctx.beginPath(); ctx.ellipse(s*.5,s*.96,s*.16,s*.04,0,0,Math.PI*2); ctx.fill();
+      /* Olympus Mons — slightly lighter raised volcano */
+      ctx.beginPath(); ctx.arc(s*.25,s*.37,s*.055,0,Math.PI*2);
+      ctx.fillStyle='rgba(195,125,75,0.45)'; ctx.fill();
+      /* Valles Marineris canyon hint — dark streak */
+      ctx.beginPath();
+      ctx.strokeStyle='rgba(90,40,15,0.40)'; ctx.lineWidth=s*.018;
+      ctx.moveTo(s*.32,s*.52); ctx.bezierCurveTo(s*.45,s*.50,s*.60,s*.53,s*.72,s*.51);
+      ctx.stroke();
+    }),
+
+    /* Jupiter: Cream-white zones + reddish-brown belts. NOT golden — more beige/cream. */
+    jupiter: makeTex(512, (ctx, s) => {
+      /* Base: pale cream — the equatorial zone colour */
+      ctx.fillStyle='#d8c4a0'; ctx.fillRect(0,0,s,s);
+      /* Alternating belts (dark reddish-brown) and zones (cream/white) — 14 bands */
+      [
+        /* [yFrac, hFrac, color] — belts are brownish, zones are cream */
+        [.00,.06,'#e8dcc0'],  // NNTz  — cream
+        [.06,.05,'#9e6840'],  // NNTb  — warm brown belt
+        [.11,.07,'#e0d0b0'],  // NTz   — cream
+        [.18,.06,'#a87048'],  // NTb   — brown belt
+        [.24,.09,'#ddd0b0'],  // NTrz  — light cream
+        [.33,.06,'#8a5230'],  // NEBn  — dark reddish belt (North Equatorial Belt)
+        [.39,.10,'#e8d8b8'],  // EZ    — brightest zone at equator
+        [.49,.07,'#8e5635'],  // SEB   — South Equatorial Belt (GRS sits in here)
+        [.56,.08,'#ddd0b0'],  // STrz  — cream
+        [.64,.05,'#9a6040'],  // STb   — brown
+        [.69,.08,'#e0d4bc'],  // STz   — cream
+        [.77,.05,'#8a5030'],  // SSTb  — dark brown
+        [.82,.09,'#ddd0b8'],  // SSTz  — cream
+        [.91,.09,'#a07050'],  // SPRz  — polar brownish
+      ].forEach(([y,h,c])=>{ ctx.fillStyle=c; ctx.fillRect(0,y*s,s,h*s); });
+      /* Great Red Spot — oval, salmon/brick red, sits in SEB */
+      ctx.save(); ctx.translate(s*.62,s*.525); ctx.rotate(-.06);
+      /* Outer halo */
+      ctx.beginPath(); ctx.ellipse(0,0,s*.10,s*.058,0,0,Math.PI*2);
+      ctx.fillStyle='#b84830'; ctx.fill();
+      /* Mid ring */
+      ctx.beginPath(); ctx.ellipse(0,0,s*.075,s*.042,0,0,Math.PI*2);
+      ctx.fillStyle='#d05035'; ctx.fill();
+      /* Bright core */
+      ctx.beginPath(); ctx.ellipse(-s*.012,-s*.006,s*.030,s*.018,0,0,Math.PI*2);
+      ctx.fillStyle='rgba(255,160,120,0.55)'; ctx.fill();
+      ctx.restore();
+      /* Polar darkening */
+      const pn=ctx.createRadialGradient(s*.5,0,0,s*.5,0,s*.45);
+      pn.addColorStop(0,'rgba(110,75,45,0.55)'); pn.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=pn; ctx.fillRect(0,0,s,s);
+      const ps=ctx.createRadialGradient(s*.5,s,0,s*.5,s,s*.45);
+      ps.addColorStop(0,'rgba(110,75,45,0.55)'); ps.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=ps; ctx.fillRect(0,0,s,s);
+    }),
+
+    /* Saturn: Pale gold-cream, subtle tan bands — much more muted than Jupiter */
+    saturn: makeTex(256, (ctx, s) => {
+      /* Base: very pale golden cream */
+      ctx.fillStyle='#e8d8a8'; ctx.fillRect(0,0,s,s);
+      /* Subtle bands — barely different from base, no strong contrast */
+      [
+        [.00,.07,'#f0e4b8'],  // NP zone — palest
+        [.07,.05,'#c8b888'],  // belt — warm tan
+        [.12,.08,'#ecdeb4'],  // zone
+        [.20,.05,'#c0b080'],  // belt
+        [.25,.10,'#eaddb0'],  // broad equatorial zone
+        [.35,.04,'#bfaa78'],  // thin belt
+        [.39,.12,'#eeddb5'],  // equatorial zone
+        [.51,.05,'#c8b888'],  // belt
+        [.56,.09,'#e8d8a8'],  // zone
+        [.65,.05,'#c0ae80'],  // belt
+        [.70,.08,'#eadcac'],  // zone
+        [.78,.05,'#c2b07a'],  // belt
+        [.83,.10,'#e8d8a8'],  // zone
+        [.93,.07,'#c8b888'],  // SP belt
+      ].forEach(([y,h,c])=>{ ctx.fillStyle=c; ctx.fillRect(0,y*s,s,h*s); });
+      /* Polar hexagon hint (North) — faint blue-grey tinge */
+      ctx.fillStyle='rgba(180,195,210,0.18)';
+      ctx.beginPath(); ctx.ellipse(s*.5,s*.06,s*.3,s*.08,0,0,Math.PI*2); ctx.fill();
+      /* Polar darkening */
+      const pn=ctx.createRadialGradient(s*.5,0,0,s*.5,0,s*.4);
+      pn.addColorStop(0,'rgba(140,115,70,0.50)'); pn.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=pn; ctx.fillRect(0,0,s,s);
+      const ps=ctx.createRadialGradient(s*.5,s,0,s*.5,s,s*.4);
+      ps.addColorStop(0,'rgba(140,115,70,0.50)'); ps.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=ps; ctx.fillRect(0,0,s,s);
+    }),
+
+    /* Uranus: Very pale blue-green / aquamarine — methane absorbs red light.
+       Featureless in visible light — Voyager 2 saw almost no cloud detail. */
+    uranus: makeTex(128, (ctx, s) => {
+      /* Base: pale cyan-aquamarine — the definitive Voyager colour */
+      ctx.fillStyle='#c0e8e4'; ctx.fillRect(0,0,s,s);
+      /* Very slight gradient pole-to-pole — rotational axis is nearly sideways */
+      const g = ctx.createLinearGradient(0,0,0,s);
+      g.addColorStop(0,'rgba(180,230,225,0.35)');
+      g.addColorStop(.4,'rgba(192,236,232,0.10)');
+      g.addColorStop(.6,'rgba(192,236,232,0.10)');
+      g.addColorStop(1,'rgba(160,215,210,0.30)');
+      ctx.fillStyle=g; ctx.fillRect(0,0,s,s);
+      /* Barely-visible horizontal haze bands */
+      for(let i=0;i<5;i++){
+        ctx.fillStyle=`rgba(150,210,205,${.06+i*.01})`;
+        ctx.fillRect(0,s*(.10+i*.18),s,s*.04);
+      }
+      /* Limb darkening — edges slightly deeper teal */
+      const ld=ctx.createRadialGradient(s*.5,s*.5,s*.18,s*.5,s*.5,s*.62);
+      ld.addColorStop(0,'rgba(210,248,244,0.0)');
+      ld.addColorStop(.75,'rgba(100,195,190,0.08)');
+      ld.addColorStop(1,'rgba(60,160,155,0.40)');
+      ctx.fillStyle=ld; ctx.fillRect(0,0,s,s);
+    }),
+
+    /* Neptune: Vivid deep cobalt-azure blue — methane + unknown chromophore.
+       Much more saturated than Uranus. Has visible cloud features. */
+    neptune: makeTex(256, (ctx, s) => {
+      /* Base: rich royal blue */
+      ctx.fillStyle='#2244c8'; ctx.fillRect(0,0,s,s);
+      /* Radial gradient — bright azure centre, darker navy edges */
+      const g = ctx.createRadialGradient(s*.42,s*.40,s*.04, s*.5,s*.5,s*.58);
+      g.addColorStop(0,'rgba(80,130,240,0.55)');
+      g.addColorStop(.5,'rgba(30,60,180,0.25)');
+      g.addColorStop(1,'rgba(5,15,100,0.60)');
+      ctx.fillStyle=g; ctx.fillRect(0,0,s,s);
+      /* Dark spot (Great Dark Spot, Voyager 1989) */
+      ctx.save(); ctx.translate(s*.55,s*.40); ctx.rotate(.18);
+      ctx.beginPath(); ctx.ellipse(0,0,s*.12,s*.065,0,0,Math.PI*2);
+      ctx.fillStyle='rgba(6,12,80,0.80)'; ctx.fill();
+      /* Bright "Scooter" companion cloud */
+      ctx.beginPath(); ctx.ellipse(s*.07,s*.09,s*.038,s*.018,-.3,0,Math.PI*2);
+      ctx.fillStyle='rgba(160,195,255,0.55)'; ctx.fill();
+      ctx.restore();
+      /* Faint latitude bands */
+      [[.08,.04,'rgba(50,90,210,0.20)'],[.28,.03,'rgba(40,80,200,0.15)'],
+       [.55,.03,'rgba(40,80,200,0.15)'],[.75,.04,'rgba(50,90,210,0.20)']].forEach(([y,h,c])=>{
+        ctx.fillStyle=c; ctx.fillRect(0,y*s,s,h*s);
+      });
+      /* Wispy high-altitude methane cirrus clouds */
+      [[.38,.66,.10,.025,.05],[.50,.30,.08,.020,.4],[.62,.78,.07,.015,.15]].forEach(([cx,cy,rx,ry,rot])=>{
+        ctx.save(); ctx.translate(cx*s,cy*s); ctx.rotate(rot);
+        ctx.beginPath(); ctx.ellipse(0,0,rx*s,ry*s,0,0,Math.PI*2);
+        ctx.fillStyle='rgba(190,215,255,0.45)'; ctx.fill(); ctx.restore();
+      });
+    }),
+  };
+
+  /* ── 8 Planet definitions ──────────────────────────────────────────────
+     r=orbit radius, size=planet radius, angle=start angle, speed=orbit speed
+     Relative sizing: Jupiter & Saturn are gas giants, Uranus/Neptune ice giants,
+     inner rocky planets are small. Orbit spacing is roughly logarithmic. ── */
+  const planetDefs = [
+    { r:1.10, size:0.052, tex:'mercury', angle:0.8,  speed:1.20, name:'Mercury' },
+    { r:1.80, size:0.090, tex:'venus',   angle:2.1,  speed:0.75, name:'Venus'   },
+    { r:2.55, size:0.095, tex:'earth',   angle:4.5,  speed:0.50, name:'Earth'   },
+    { r:3.30, size:0.058, tex:'mars',    angle:1.2,  speed:0.32, name:'Mars'    },
+    { r:4.55, size:0.220, tex:'jupiter', angle:3.8,  speed:0.14, name:'Jupiter' },
+    { r:5.90, size:0.185, tex:'saturn',  angle:0.5,  speed:0.09, name:'Saturn',
+      rings:[
+        /* Saturn's rings are water-ice + dust — appear bright white to cream-grey */
+        { inner:1.20, outer:1.52, col:0xb8b0a0, op:0.30 },  // C-ring  — faint dusky grey
+        { inner:1.55, outer:2.20, col:0xe8e0d0, op:0.82 },  // B-ring  — brightest, near-white
+        { inner:2.24, outer:2.88, col:0xd8d0c0, op:0.60 },  // A-ring  — slightly darker
+        { inner:2.90, outer:3.02, col:0xc0b8a8, op:0.18 },  // F-ring  — thin faint outer
+      ],
+      ringTilt: Math.PI/2 - 0.47,
+    },
+    { r:7.30, size:0.130, tex:'uranus',  angle:2.8,  speed:0.06, name:'Uranus',
+      rings:[
+        /* Uranus's rings are very dark — almost black, carbon-rich particles */
+        { inner:1.60, outer:1.72, col:0x383838, op:0.55 },
+        { inner:1.78, outer:1.92, col:0x303030, op:0.45 },
+      ],
+      ringTilt: 0.08,
+      ringRotZ: Math.PI/2 - 0.15,
+    },
+    { r:8.70, size:0.120, tex:'neptune', angle:5.1,  speed:0.04, name:'Neptune' },
+  ];
+
+  const planets = planetDefs.map(def => {
+    /* ── Orbit trail ring (lies in XZ plane of solarSystem) ── */
+    const orbitRing = new THREE.Mesh(
+      new THREE.TorusGeometry(def.r, 0.006, 4, 128),
+      new THREE.MeshBasicMaterial({ color:0xffffff, transparent:true, opacity:0.11, depthWrite:false })
+    );
+    orbitRing.rotation.x = Math.PI / 2;
+    solarSystem.add(orbitRing);
+
+    /* ── Pivot group — rotating this around Y drives the orbit ── */
+    const pivot = new THREE.Group();
+    pivot.rotation.y = def.angle;   // spread planets around at start
+    solarSystem.add(pivot);
+
+    /* ── Planet sphere with canvas texture ── */
+    const planet = new THREE.Mesh(
+      new THREE.SphereGeometry(def.size, 32, 32),
+      new THREE.MeshPhongMaterial({
+        map: textures[def.tex],
+        shininess: def.tex === 'venus' ? 70 : def.tex === 'earth' ? 45 : 20,
+        specular: def.tex === 'earth'   ? new THREE.Color(0x224466) :
+                  def.tex === 'neptune' ? new THREE.Color(0x102040) :
+                                          new THREE.Color(0x111111),
+      })
+    );
+    /* Place planet at orbit radius on pivot's local X axis */
+    planet.position.set(def.r, 0, 0);
+
+    /* Axial tilt (applied as Z-rotation on the planet, not the pivot) */
+    const tilts = { earth:0.41, mars:0.44, saturn:0.47, uranus:1.71, neptune:0.49 };
+    if (tilts[def.tex]) planet.rotation.z = tilts[def.tex];
+
+    /* ── Saturn rings — 3 layers: faint C-ring, bright B-ring, outer A-ring ── */
+    if (def.rings) {
+      const ringGroup = new THREE.Group();
+      def.rings.forEach(ring => {
+        const rg = new THREE.RingGeometry(def.size * ring.inner, def.size * ring.outer, 96);
+        /* Fix ring UVs so there's no seam artifact */
+        const pos = rg.attributes.position, uv = rg.attributes.uv;
+        for (let i = 0; i < pos.count; i++) {
+          const x = pos.getX(i), y = pos.getY(i);
+          uv.setXY(i, (x / (def.size * ring.outer) + 1) * 0.5,
+                      (y / (def.size * ring.outer) + 1) * 0.5);
+        }
+        ringGroup.add(new THREE.Mesh(rg, new THREE.MeshBasicMaterial({
+          color: ring.col, transparent: true, opacity: ring.op,
+          side: THREE.DoubleSide, depthWrite: false
+        })));
+      });
+      /* Saturn tilted ~27° from orbital plane; Uranus nearly vertical (~98°) */
+      if (def.ringTilt  !== undefined) ringGroup.rotation.x = def.ringTilt;
+      if (def.ringRotZ  !== undefined) ringGroup.rotation.z = def.ringRotZ;
+      planet.add(ringGroup);
+    }
+
+    pivot.add(planet);
+
+    return {
+      pivot,
+      mesh: planet,
+      speed: def.speed,
+      /* Each planet's self-rotation speed (day length) */
+      spinSpeed: def.tex === 'mercury' ? 0.0004 : def.tex === 'venus' ? 0.0002 :
+                 def.tex === 'earth'   ? 0.003  : def.tex === 'mars'  ? 0.0029 :
+                 def.tex === 'jupiter' ? 0.008  : def.tex === 'saturn' ? 0.007 :
+                 def.tex === 'uranus'  ? 0.004  : 0.003,
+    };
+  });
+
+  /* Point light from the sun — range extended for outer planets */
+  const sunLight = new THREE.PointLight(0xfff5cc, 3.0, 22, 2);
+  solarSystem.add(sunLight);
+
+  /* ── Far lantern glow cloud ── */
+  const FAR = 380;
+  const fp = new Float32Array(FAR*3);
+  for(let i=0;i<FAR;i++){fp[i*3]=(Math.random()-.5)*30;fp[i*3+1]=-14+Math.random()*30;fp[i*3+2]=-10+Math.random()*6;}
+  const farGeo = new THREE.BufferGeometry(); farGeo.setAttribute('position',new THREE.BufferAttribute(fp,3));
+  const farPoints = new THREE.Points(farGeo, new THREE.PointsMaterial({size:.055,color:0xffbb44,transparent:true,opacity:.45,depthWrite:false,sizeAttenuation:true}));
+  scene.add(farPoints);
+
+  /* ── Lantern geometry factory ── returns { group, bodyMat, flameMat } ── */
+  function makeLantern(s) {
+    const group = new THREE.Group();
+
+    /* Cylinder with vertex color gradient — hot orange-red at bottom (flame), amber at top */
+    const geo = new THREE.CylinderGeometry(0.22*s, 0.22*s, 0.6*s, 12, 8);
+    const posArr = geo.attributes.position.array;
+    const colArr = new Float32Array(posArr.length);
+    const halfH = 0.3 * s;
+    for(let i = 0; i < posArr.length / 3; i++) {
+      const y = posArr[i * 3 + 1];
+      const t = (y + halfH) / (2 * halfH); // 0=bottom, 1=top
+      colArr[i*3]   = 1.0;
+      colArr[i*3+1] = 0.18 + t * 0.62;
+      colArr[i*3+2] = 0.0  + t * 0.10;
+    }
+    geo.setAttribute('color', new THREE.BufferAttribute(colArr, 3));
+
+    const bodyMat = new THREE.MeshPhongMaterial({
+      vertexColors: true,
+      emissive: 0xff3300, emissiveIntensity: 0.35,
+      transparent: true, opacity: 0.0,   // start invisible, faded in per-frame
+      shininess: 10, depthWrite: false
+    });
+    group.add(new THREE.Mesh(geo, bodyMat));
+
+    /* Flame — bright white-yellow core */
+    const flameMat = new THREE.MeshBasicMaterial({
+      color: 0xffee00, transparent: true, opacity: 0.0, depthWrite: false
+    });
+    const flame = new THREE.Mesh(new THREE.SphereGeometry(0.06*s, 6, 6), flameMat);
+    flame.position.y = -0.28*s;
+    group.add(flame);
+
+    return { group, bodyMat, flameMat };
+  }
+
+  /* ── Populate lanterns at two depth layers ── */
+  const lanterns = [];
+
+  function spawnLantern(s, zMin, zMax, startY) {
+    const { group, bodyMat, flameMat } = makeLantern(s);
+    const x = (Math.random()-.5) * 20;
+    const z = zMin + Math.random()*(zMax-zMin);
+    group.position.set(x, startY, z);
+    group.rotation.y = Math.random()*Math.PI*2;
+    scene.add(group);
+    lanterns.push({
+      mesh: group, bodyMat, flameMat,
+      baseX: x, baseZ: z,
+      baseOpacity: 0.88,        // target max body opacity
+      speed: 0.009+Math.random()*0.013,
+      phX: Math.random()*Math.PI*2, phZ: Math.random()*Math.PI*2,
+      frX: 0.22+Math.random()*0.30, frZ: 0.16+Math.random()*0.22,
+      ampX: 0.22+Math.random()*0.28, ampZ: 0.08+Math.random()*0.12,
+    });
+  }
+
+  /* Mid-distance — 28 lanterns */
+  for(let i=0;i<28;i++) spawnLantern(0.5+Math.random()*0.55, -4, -0.5, -11+Math.random()*24);
+  /* Near hero layer — 9 larger, closer */
+  for(let i=0;i<9;i++)  spawnLantern(0.9+Math.random()*0.75,  0.5, 3.5, -11+Math.random()*24);
+
+  /* ── Lighting ── two warm point lights max for performance ── */
+  scene.add(new THREE.AmbientLight(0xffe0a0, 0.22));
+  const L1 = new THREE.PointLight(0xffaa33, 2.0, 22, 2); L1.position.set(4, 1, 7);  scene.add(L1);
+  const L2 = new THREE.PointLight(0xff7722, 1.4, 20, 2); L2.position.set(-5, -1, 5); scene.add(L2);
+
+  /* Resize */
+  function resize(){
+    const w=canvas.clientWidth, h=canvas.clientHeight;
+    R.setSize(w,h,false); cam.aspect=w/h; cam.updateProjectionMatrix();
+  }
+  resize(); window.addEventListener('resize',resize);
+
+  /* Pause when off-screen */
+  let vis=true;
+  new IntersectionObserver(([e])=>{vis=e.isIntersecting},{threshold:.05}).observe(canvas);
+
+  /* Mouse subtle parallax */
+  let mx=0,my=0;
+  window.addEventListener('mousemove',(e)=>{mx=(e.clientX/innerWidth-.5)*2;my=(e.clientY/innerHeight-.5)*2;});
+
+  /* ── Scroll-driven space flight ──────────────────────────────────────
+     As the user scrolls through the 300vh hero, the camera flies forward
+     through the star field toward (and past) the solar system.
+     progress 0 = hero top, 1 = hero bottom (transition to 2D sections). ── */
+  let scrollProgress = 0;
+  const heroEl     = document.getElementById('hero');
+  const heroUi     = document.getElementById('hero-ui');
+  const spaceFade  = document.getElementById('space-fade');
+
+  window.addEventListener('scroll', () => {
+    const heroH   = heroEl.offsetHeight - window.innerHeight;
+    scrollProgress = Math.max(0, Math.min(1, window.scrollY / heroH));
+
+    /* ── Phase 1 (0% → 15%): hero text fades out ── */
+    const uiFade = Math.max(0, 1 - scrollProgress * (1 / 0.15));
+    heroUi.style.opacity       = uiFade;
+    heroUi.style.pointerEvents = uiFade < 0.05 ? 'none' : '';
+
+    /* ── Phase 2 (30% → 88%): canvas dims — stars themselves fade out.
+          A slow 58% scroll window gives a very cinematic, gradual extinction. ── */
+    const starDim = Math.max(0, Math.min(1, (scrollProgress - 0.30) / 0.58));
+    /* Ease-in curve so it starts imperceptibly and accelerates toward black */
+    const starOpacity = Math.max(0, 1 - starDim * starDim);
+    canvas.style.opacity = starOpacity;
+
+    /* ── Phase 3 (65% → 95%): black overlay sweeps in over dimming stars ──
+          Starts while stars are still faintly visible, completes to solid black. ── */
+    const blackFade = Math.max(0, Math.min(1, (scrollProgress - 0.65) / 0.30));
+    /* Ease-out: fast start, slow finish so it lingers in full black */
+    spaceFade.style.opacity = 1 - Math.pow(1 - blackFade, 1.8);
+  });
+
+  /* Reusable projection vector — avoids per-frame allocation in lantern loop */
+  const _proj = new THREE.Vector3();
+
+  /* Loop */
+  let targetCamZ = 10;
+  (function loop(){
+    requestAnimationFrame(loop);
+    if(!vis) return;
+    const t=performance.now()*.001;
+
+    /* Camera flies forward as scroll progresses: z 10 → -8 (deeper into the field) */
+    targetCamZ = 10 - scrollProgress * 18;
+    cam.position.z += (targetCamZ - cam.position.z) * 0.06;
+
+    /* Slight downward tilt mid-journey to reveal solar system, then straighten */
+    const tiltTarget = scrollProgress < 0.4
+      ? scrollProgress * -0.22
+      : scrollProgress < 0.7
+        ? (0.4 - (scrollProgress - 0.4)) * -0.22 / 0.4
+        : 0;
+    cam.rotation.x += (tiltTarget - cam.rotation.x) * 0.04;
+
+    /* Far glow cloud drifts upward as one mass */
+    farPoints.position.y += 0.005;
+    if(farPoints.position.y > 5) farPoints.position.y = -5;
+
+    /* Animate each lantern — opacity driven by screen-space Y so the fade
+       tracks the actual pixel position regardless of depth / FOV. */
+    lanterns.forEach(l=>{
+      /* Rise */
+      l.mesh.position.y += l.speed;
+      /* Gentle sway */
+      l.mesh.position.x = l.baseX + Math.sin(t*l.frX + l.phX)*l.ampX + mx*0.45;
+      l.mesh.position.z = l.baseZ + Math.sin(t*l.frZ + l.phZ)*l.ampZ;
+      /* Slow rotation */
+      l.mesh.rotation.y += 0.003;
+
+      /* Project world position → NDC.  ndcY: -1 = bottom, +1 = top of viewport */
+      _proj.copy(l.mesh.position).project(cam);
+      const ndcY = _proj.y;
+
+      /* Fade IN  over bottom 22% of screen height  (ndcY -1 → -0.56) */
+      const fadeIn  = Math.min(1, Math.max(0, (ndcY + 1) / 0.44));
+      /* Fade OUT over top    14% of screen height  (ndcY 0.86 → 1.0)
+         — completes to zero exactly at the viewport top edge (nav bar sits above) */
+      const fadeOut = Math.min(1, Math.max(0, (1 - ndcY) / 0.14));
+
+      const alpha = Math.min(fadeIn, fadeOut);
+      l.bodyMat.opacity  = l.baseOpacity * alpha;
+      l.flameMat.opacity = alpha;
+
+      /* Reset: recycle once the lantern is fully above the screen */
+      if(l.mesh.position.y > 18){
+        l.mesh.position.y = -14;
+        l.baseX = (Math.random()-.5)*20;
+        l.bodyMat.opacity  = 0;
+        l.flameMat.opacity = 0;
+      }
+    });
+
+    /* Orbit planets around the sun via pivot rotation, self-spin separately */
+    planets.forEach(p => {
+      p.pivot.rotation.y += p.speed * 0.003;   // orbit
+      p.mesh.rotation.y  += p.spinSpeed;        // day/night self-rotation
+    });
+    /* Drive sun shader */
+    sunUniforms.time.value = t;
+
+    /* Key light drifts slightly for ambient movement */
+    L1.position.x = 4 + Math.sin(t*0.4)*1.5;
+    L1.position.y = 1 + Math.cos(t*0.3)*1;
+
+    /* Camera mouse parallax — reduced when deep in scroll (flying fast) */
+    const parallaxScale = Math.max(0, 1 - scrollProgress * 1.5);
+    cam.position.x += (mx * 0.55 * parallaxScale - cam.position.x) * 0.022;
+    cam.position.y += (-my * 0.28 * parallaxScale - cam.position.y) * 0.022;
+    R.render(scene,cam);
+  })();
+})();
+
+/* ── Scroll reveal ── */
+new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{ if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*70); } });
+},{threshold:.1}).observe && document.querySelectorAll('.reveal').forEach(el=>
+  new IntersectionObserver(([e])=>{ if(e.isIntersecting){e.target.classList.add('in');} },{threshold:.1}).observe(el)
+);
+
+/* ── View more ── */
+(()=>{
+  const btn = document.getElementById('view-more-btn');
+  const extras = ['ep1','ep2','ep3','ep4'].map(id => document.getElementById(id)).filter(Boolean);
+  let open = false;
+  btn.addEventListener('click', () => {
+    open = !open;
+    extras.forEach(e => { e.style.display = open ? 'flex' : 'none'; });
+    btn.textContent = open ? '− Collapse' : '+ View more';
+  });
+})();
+
+/* ── Tech grid ── */
+(()=>{
+  const stack=[
+    {n:'Python',s:'assets/SVGs/python-5.svg'},{n:'SQL',s:'assets/SVGs/mysql-logo-pure.svg'},
+    {n:'PyTorch',s:'assets/SVGs/pytorch-icon.svg'},{n:'Pandas',s:'assets/SVGs/pandas.svg'},
+    {n:'NumPy',s:'assets/SVGs/numpy-1.svg'},{n:'Scikit-Learn',s:'assets/SVGs/scikit-learn.svg'},
+    {n:'Matplotlib',s:'assets/SVGs/matplotlib-1.svg'},{n:'Seaborn',s:'assets/SVGs/seaborn-1.svg'},
+    {n:'Tableau',s:'assets/SVGs/tableau-software.svg'},{n:'Spark',s:'assets/SVGs/Apache Spark.svg'},
+    {n:'Databricks',s:'assets/SVGs/Databricks_idF4fnHpaJ_0.svg'},{n:'Snowflake',s:'assets/SVGs/Snowflake_idCkdSg0B6_0.svg'},
+    {n:'BigQuery',s:'assets/SVGs/bigquery.svg'},{n:'GCP',s:'assets/SVGs/GCP.svg'},
+    {n:'Amazon S3',s:'assets/SVGs/aws-s3-svgrepo-com.svg'},{n:'MongoDB',s:'assets/SVGs/mongodb-icon-1.svg'},
+    {n:'Docker',s:'assets/SVGs/icons8-docker.svg'},{n:'Jupyter',s:'assets/SVGs/jupyter-svgrepo-com-2.svg'},
+    {n:'Colab',s:'assets/SVGs/colab-color.svg'},{n:'Looker',s:'assets/SVGs/looker.svg'},
+    {n:'Figma',s:'assets/SVGs/figma.svg'},{n:'Java',s:'assets/SVGs/java-icon.svg'},
+    {n:'Excel',s:'assets/SVGs/icons8-excel.svg'},{n:'Unsloth',s:'assets/SVGs/unsloth-2.svg'},
+    {n:'Pycaret',s:'assets/SVGs/pycaret.svg'}
+  ];
+  document.getElementById('tech-grid').innerHTML =
+    stack.map(x=>`<div class="tech-item"><img src="${x.s}" alt="${x.n}" loading="lazy"/><span>${x.n}</span></div>`).join('');
+})();
+
+/* ── 3D card tilt ── */
+(()=>{
+  document.querySelectorAll('.project-card').forEach(card => {
+    const glare = document.createElement('div');
+    glare.className = 'card-glare';
+    card.appendChild(glare);
+
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top)  / r.height;
+      const tiltY =  (x - 0.5) * 16;
+      const tiltX = -(y - 0.5) * 12;
+      card.style.transform = `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.03)`;
+      card.style.setProperty('--gx', `${x * 100}%`);
+      card.style.setProperty('--gy', `${y * 100}%`);
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+  });
+})();
+
+/* ── Logo img error handler — shows initials fallback if SVG fails ── */
+document.querySelectorAll('.tl-logo img').forEach(img => {
+  if (!img.complete || img.naturalWidth === 0) {
+    img.addEventListener('error', () => img.classList.add('errored'));
+    // Also catch already-errored images (e.g. cached 404)
+    if (img.complete && img.naturalWidth === 0) img.classList.add('errored');
+  }
+});
+
+
+/* ── Grain + scroll-distortion shader canvas ── */
+(function() {
+  const canvas = document.getElementById('grain-canvas');
+  if (!canvas) return;
+
+  const R = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
+  R.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+  R.setClearColor(0x06040e, 1);
+
+  /* Orthographic camera — quad fills exactly clip space */
+  const scene = new THREE.Scene();
+  const cam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+  const uniforms = {
+    uTime:     { value: 0.0 },
+    uVelocity: { value: 0.0 },   // smoothed scroll velocity → drives distortion
+    uRes:      { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
+  };
+
+  /* Full-screen quad */
+  const mat = new THREE.ShaderMaterial({
+    uniforms,
+    vertexShader: `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = vec4(position.xy, 0.0, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform float uTime;
+      uniform float uVelocity;
+      uniform vec2  uRes;
+      varying vec2  vUv;
+
+      /* ── Value noise ── */
+      float hash2(vec2 p) {
+        p = fract(p * vec2(234.34, 435.345));
+        p += dot(p, p + 34.23);
+        return fract(p.x * p.y);
+      }
+      float vnoise(vec2 p) {
+        vec2 i = floor(p), f = fract(p);
+        f = f * f * (3.0 - 2.0 * f);
+        return mix(
+          mix(hash2(i), hash2(i+vec2(1,0)), f.x),
+          mix(hash2(i+vec2(0,1)), hash2(i+vec2(1,1)), f.x),
+          f.y
+        );
+      }
+
+      void main() {
+        vec2 uv = vUv;
+
+        /* ── Scroll-velocity wave displacement ──────────────────────────
+           Two sine waves: one vertical (ripple across X), one horizontal.
+           Amplitude scales with |velocity| so it's calm at rest. ── */
+        float vel = uVelocity;
+        float waveX = sin(uv.y * 7.0 - uTime * 0.35 + vel * 0.5) * vel * 0.016;
+        float waveY = cos(uv.x * 5.0 + uTime * 0.22 - vel * 0.3) * vel * 0.009;
+        uv += vec2(waveX, waveY);
+
+        /* ── Dark base gradient ─────────────────────────────────────────
+           Deep midnight at top, slightly warmer purple-black at bottom ── */
+        vec3 topCol    = vec3(0.04, 0.02, 0.08);
+        vec3 bottomCol = vec3(0.07, 0.04, 0.12);
+        vec3 col = mix(topCol, bottomCol, uv.y);
+
+        /* Subtle vignette — darkens edges */
+        float vig = 1.0 - smoothstep(0.35, 1.0, length((uv - 0.5) * 1.6));
+        col *= 0.6 + 0.4 * vig;
+
+        /* ── Animated film grain — three octaves ───────────────────────
+           Pixel-density scaled so grain feels physical regardless of res ── */
+        float t = uTime * 0.09;
+        vec2 gUv = uv * uRes / 320.0;
+        float g  = vnoise(gUv          + t        ) * 0.50;
+        g       += vnoise(gUv * 2.13   - t * 0.72 ) * 0.25;
+        g       += vnoise(gUv * 4.67   + t * 0.44 ) * 0.125;
+        g        = (g / 0.875) - 0.5;   /* centre around 0 */
+
+        /* Grain is slightly more visible at extreme velocity (extra texture while scrolling) */
+        float grainAmt = 0.055 + abs(uVelocity) * 0.012;
+        col += g * grainAmt;
+
+        /* Faint slow nebula-like colour drift */
+        float nebula = vnoise(uv * 3.2 + vec2(uTime * 0.04, -uTime * 0.03)) * 0.5 + 0.5;
+        col += vec3(0.04, 0.0, 0.08) * nebula * 0.12;
+
+        col = clamp(col, 0.0, 1.0);
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `
+  });
+
+  scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), mat));
+
+  /* ── Resize ── */
+  function resize() {
+    R.setSize(window.innerWidth, window.innerHeight, false);
+    uniforms.uRes.value.set(window.innerWidth, window.innerHeight);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  /* ── Scroll velocity tracking ── */
+  let lastScrollY  = window.scrollY;
+  let velocity     = 0.0;
+  let targetVel    = 0.0;
+  let grainVisible = false;
+
+  const heroEl = document.getElementById('hero');
+
+  window.addEventListener('scroll', () => {
+    targetVel   = (window.scrollY - lastScrollY) * 0.12;
+    lastScrollY = window.scrollY;
+
+    /* Show grain canvas once the user has scrolled into the 2D sections.
+       The hero is 500vh; grain appears as the hero finishes. */
+    const heroEnd = heroEl.offsetTop + heroEl.offsetHeight - window.innerHeight;
+    if (window.scrollY >= heroEnd && !grainVisible) {
+      canvas.classList.add('visible');
+      grainVisible = true;
+    } else if (window.scrollY < heroEnd * 0.95 && grainVisible) {
+      canvas.classList.remove('visible');
+      grainVisible = false;
+    }
+  });
+
+  /* ── Render loop ── */
+  (function loop() {
+    requestAnimationFrame(loop);
+    uniforms.uTime.value = performance.now() * 0.001;
+
+    /* Smooth velocity with quick attack, slow decay */
+    velocity  += (targetVel - velocity) * 0.10;
+    targetVel *= 0.80;
+    uniforms.uVelocity.value = velocity;
+
+    R.render(scene, cam);
+  })();
+})();
+</script>
+</body>
 </html>
